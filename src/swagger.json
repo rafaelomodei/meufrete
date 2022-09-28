@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "meufrete.com",
+        "description": "This is an API Rest",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/loads": {
+            "post": {
+                "tags": [
+                    "Loads"
+                ],
+                "summary": "create a load",
+                "description": "Create a new load",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "weight": {
+                                        "type": "number"
+                                    }
+                                },
+                                "example": {
+                                    "name": "load name sample",
+                                    "weight": "load weight sample"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Load already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Loads"
+                ],
+                "summary": "List all loads",
+                "description": "List all loads",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "weight": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

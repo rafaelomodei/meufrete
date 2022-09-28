@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    container_name: meufretecom
+    ports:
+      - 3334:3334
+    volumes:
+      - .:/usr/app

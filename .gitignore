@@ -1,0 +1,4 @@
+node_modules
+database_env.env
+file.csv
+yarn.lock

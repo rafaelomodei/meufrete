@@ -5,22 +5,22 @@ services:
     image: postgres
     container_name: database_meufretecom
     restart: always
-    ports:
-      - 5432:5432
+    # ports:
+    #   - 5432:5432
     env_file:
       - "./database_env.env"
     volumes:
       - pgdata:/data/postgres
-    # network_mode: host
+    network_mode: host
  
   app:
     build: .
     container_name: meufretecom
-    ports:
-      - 3334:3334
+    # ports:
+    #   - 3334:3334
     volumes:
       - .:/usr/app
-    # network_mode: host
+    network_mode: host
 
 volumes:
   pgdata:

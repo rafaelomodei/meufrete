@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { ILoadsRepository } from '../../repositories/ILoadsRepositories';
 
 interface IRequest {
@@ -5,8 +6,12 @@ interface IRequest {
   weight: number;
 }
 
+@injectable()
 class CreateLoadUseCase {
-  constructor(private loadsRepository: ILoadsRepository) {}
+  constructor(
+    @inject('LoadsRepository')
+    private loadsRepository: ILoadsRepository
+  ) {}
 
   async execute({ name, weight }: IRequest): Promise<void> {
     const loadAlreadyExists = await this.loadsRepository.findByName(name);

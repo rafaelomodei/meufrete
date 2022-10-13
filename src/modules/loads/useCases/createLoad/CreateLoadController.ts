@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { CreateLoadUseCase } from './CreateLoadUseCase';
+import { container } from 'tsyringe';
 
 class CreateLoadController {
-  constructor(private createLoadUseCase: CreateLoadUseCase) {}
-
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, weight } = request.body;
-
-    await this.createLoadUseCase.execute({ name, weight });
+    
+    const createLoadUseCase = container.resolve(CreateLoadUseCase);
+    await createLoadUseCase.execute({ name, weight });
 
     return response.status(201).send();
   }

@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^18.7.23",
     "csv-parse": "^5.3.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "express": "^4.18.1",
@@ -20,6 +19,7 @@
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },
   "devDependencies": {
+    "@types/node": "^18.7.23",
     "@types/express": "^4.17.14",
     "@types/multer": "^1.4.7",
     "@types/swagger-ui-express": "^4.1.3",

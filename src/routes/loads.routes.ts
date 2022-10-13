@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import multer from 'multer';
 
-import { createLoadController } from '../modules/loads/useCases/createLoad';
+import createLoadController from '../modules/loads/useCases/createLoad';
 import { importLoadController } from '../modules/loads/useCases/importLoad';
 import { listLoadsController } from '../modules/loads/useCases/listLoads';
 
@@ -11,11 +11,11 @@ const upload = multer({
 });
 
 loadsRoutes.post('/', (request: Request, response: Response) =>
-createLoadController.handle(request, response)
+  createLoadController().handle(request, response)
 );
 
 loadsRoutes.get('/', (request: Request, response: Response) =>
-listLoadsController.handle(request, response)
+  listLoadsController.handle(request, response)
 );
 
 loadsRoutes.post(

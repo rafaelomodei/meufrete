@@ -1,4 +1,4 @@
-import { Load } from '../../model/Load';
+import { Load } from '../../entities/Load';
 import { ILoadsRepository } from '../../repositories/ILoadsRepositories';
 
 class ListLoadsUseCase {

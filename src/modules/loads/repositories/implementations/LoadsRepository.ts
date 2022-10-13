@@ -1,44 +1,32 @@
-import { Load } from '../../model/Load';
+import { Repository } from 'typeorm';
+import AppDataSource from '../../../../database/dataSource';
+import { Load } from '../../entities/Load';
 import { ILoadsRepository, ILoadDTO } from '../ILoadsRepositories';
 
 class LoadsRepository implements ILoadsRepository {
-  private loads: Load[];
+  private repository: Repository<Load>;
 
-  private static INSTANCE: LoadsRepository;
-
-  private constructor() {
-    this.loads = [];
+  constructor() {
+    this.repository = AppDataSource.getRepository(Load);
   }
 
-  public static getInstance(): LoadsRepository {
-    if (!LoadsRepository.INSTANCE)
-    LoadsRepository.INSTANCE = new LoadsRepository();
-    return LoadsRepository.INSTANCE;
-  }
-
-  create({ name, weight }: ILoadDTO): void {
-    const load = new Load();
-
-    const nameLoad = name.toLowerCase();
-
-    Object.assign(load, {
-      name: nameLoad,
+  async create({ name, weight }: ILoadDTO): Promise<void> {
+    const load = this.repository.create({
+      name,
       weight,
-      createAt: new Date(),
     });
 
-    this.loads.push(load);
+    await this.repository.save(load);
   }
 
-  list(): Load[] {
-    return this.loads;
+  async list(): Promise<Load[]> {
+    const loads = await this.repository.find();
+    return loads;
   }
 
-  findByName(name: string): Load {
-    const nameLoad = name.toLowerCase();
-    const load = this.loads.find(
-      (load) => load.name === nameLoad
-    );
+  async findByName(name: string): Promise<Load> {
+    // const nameLoad = name.toLowerCase();
+    const load = await this.repository.findOne({ where: { name } });
 
     return load;
   }

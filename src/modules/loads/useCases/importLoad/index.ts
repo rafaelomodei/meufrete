@@ -2,7 +2,7 @@ import { LoadsRepository } from '../../repositories/implementations/LoadsReposit
 import { ImportLoadController } from './ImportLoadController';
 import { ImportLoadUseCase } from './ImportLoadUseCase';
 
-const importLoadsRepository = LoadsRepository.getInstance();
+const importLoadsRepository = null;
 const importLoadUseCase = new ImportLoadUseCase(importLoadsRepository);
 const importLoadController = new ImportLoadController(
   importLoadUseCase

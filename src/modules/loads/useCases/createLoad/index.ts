@@ -2,8 +2,9 @@ import { LoadsRepository } from '../../repositories/implementations/LoadsReposit
 import { CreateLoadController } from './CreateLoadController';
 import { CreateLoadUseCase } from './CreateLoadUseCase';
 
-const loadsRepository = LoadsRepository.getInstance();
-const createLoadUseCase = new CreateLoadUseCase(loadsRepository);
-const createLoadController = new CreateLoadController(createLoadUseCase);
-
-export { createLoadController };
+export default (): CreateLoadController => {
+  const loadsRepository = new LoadsRepository();
+  const createLoadUseCase = new CreateLoadUseCase(loadsRepository);
+  const createLoadController = new CreateLoadController(createLoadUseCase);
+  return createLoadController;
+};

@@ -1,4 +1,4 @@
-import { Load } from '../model/Load';
+import { Load } from '../entities/Load';
 
 interface ILoadDTO {
   name: string;
@@ -6,9 +6,9 @@ interface ILoadDTO {
 }
 
 interface ILoadsRepository {
-  findByName(name: string): Load;
-  list(): Load[];
-  create({ name, weight }: ILoadDTO): void;
+  findByName(name: string): Promise<Load>;
+  list(): Promise<Load[]>;
+  create({ name, weight }: ILoadDTO): Promise<void>;
 }
 
 export { ILoadsRepository, ILoadDTO };

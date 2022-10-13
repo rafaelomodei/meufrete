@@ -7,8 +7,10 @@ services:
     restart: always
     # ports:
     #   - 5432:5432
-    env_file:
-      - "./database_env.env"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=omodei
+      - POSTGRES_DB=meufretecom
     volumes:
       - pgdata:/data/postgres
     network_mode: host

@@ -4,10 +4,10 @@ import { CreateLoadUseCase } from './CreateLoadUseCase';
 class CreateLoadController {
   constructor(private createLoadUseCase: CreateLoadUseCase) {}
 
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, weight } = request.body;
 
-    this.createLoadUseCase.execute({ name, weight });
+    await this.createLoadUseCase.execute({ name, weight });
 
     return response.status(201).send();
   }

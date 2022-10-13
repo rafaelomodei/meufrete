@@ -8,8 +8,8 @@ interface IRequest {
 class CreateLoadUseCase {
   constructor(private loadsRepository: ILoadsRepository) {}
 
-  execute({ name, weight }: IRequest): void {
-    const loadAlreadyExists = this.loadsRepository.findByName(name);
+  async execute({ name, weight }: IRequest): Promise<void> {
+    const loadAlreadyExists = await this.loadsRepository.findByName(name);
 
     if (loadAlreadyExists) throw new Error('load already exists');
 

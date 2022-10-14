@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { CreateLoadUseCase } from './CreateLoadUseCase';
 import { container } from 'tsyringe';
+import { CreateLoadUseCase } from './CreateLoadUseCase';
 
 class CreateLoadController {
   async handle(request: Request, response: Response): Promise<Response> {

@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { parse } from 'csv-parse';
+import { inject, injectable } from 'tsyringe';
 import { LoadsRepository } from '../../repositories/implementations/LoadsRepository';
 
 interface IImportLoads {
@@ -7,8 +8,12 @@ interface IImportLoads {
   weight: number;
 }
 
+@injectable()
 class ImportLoadUseCase {
-  constructor(private loadsRepository: LoadsRepository) {}
+  constructor(
+    @inject('LoadsRepository')
+    private loadsRepository: LoadsRepository
+  ) {}
 
   loadLoads(file: Express.Multer.File): Promise<IImportLoads[]> {
     return new Promise((resolve, reject) => {
@@ -35,12 +40,12 @@ class ImportLoadUseCase {
 
   async execute(file: Express.Multer.File): Promise<void> {
     const loads = await this.loadLoads(file);
-    loads.map((load) => {
+    loads.map(async (load) => {
       const { name, weight } = load;
 
-      const existsLoad = this.loadsRepository.findByName(name);
+      const existsLoad = await this.loadsRepository.findByName(name);
 
-      if (!existsLoad) this.loadsRepository.create({ name, weight });
+      if (!existsLoad) await this.loadsRepository.create({ name, weight });
     });
   }
 }

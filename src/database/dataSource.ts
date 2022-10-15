@@ -8,7 +8,10 @@ const AppDataSource = new DataSource({
   password: 'omodei',
   database: 'meufretecom',
   migrations: ['./src/database/migrations/*.ts'],
-  entities: ["./src/modules/loads/entities/Load.ts"]
+  entities: [
+    './src/modules/loads/entities/Load.ts',
+    './src/modules/companies/entities/Company.ts',
+  ],
 });
 
 export default AppDataSource;

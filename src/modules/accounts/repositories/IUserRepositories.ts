@@ -4,6 +4,7 @@ import { Driver } from "../entities/Driver";
 interface IDriversRepository {
   create(data: ICreateDriverDTO): Promise<void>;
   findByEmail(email: string): Promise<Driver>;
+  findById(id: string): Promise<Driver>;
 }
 
 export { IDriversRepository };

@@ -30,6 +30,14 @@ class DriversRepository implements IDriversRepository {
 
     return driver;
   }
+
+  async findById(id: string): Promise<Driver> {
+    const user = await this.repository.findOne({
+      where: { id },
+    });
+
+    return user;
+  }
 }
 
 export { DriversRepository };

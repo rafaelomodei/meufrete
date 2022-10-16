@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../../errors/AppErrors';
 import { ILoadsRepository } from '../../repositories/ILoadsRepositories';
 
 interface IRequest {
@@ -16,7 +17,7 @@ class CreateLoadUseCase {
   async execute({ name, weight }: IRequest): Promise<void> {
     const loadAlreadyExists = await this.loadsRepository.findByName(name);
 
-    if (loadAlreadyExists) throw new Error('load already exists');
+    if (loadAlreadyExists) throw new AppError('load already exists', 409);
 
     this.loadsRepository.create({ name, weight });
   }

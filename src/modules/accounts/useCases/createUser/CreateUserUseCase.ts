@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcrypt';
 import { IDriversRepository } from '../../repositories/IUserRepositories';
 import { ICreateDriverDTO } from '../../dtos/ICreateDriverDTO';
+import { AppError } from '../../../../errors/AppErrors';
 
 @injectable()
 class CreateDriverUseCase {
@@ -15,7 +16,7 @@ class CreateDriverUseCase {
 
     const emailDriver = email.toLowerCase();
     const driverAlreadyExists = await this.driversRepository.findByEmail(emailDriver);
-    if (driverAlreadyExists) throw new Error('Driver already exists');
+    if (driverAlreadyExists) throw new AppError('Driver already exists', 409);
 
     const passwordHash = await hash(password, 8);
 

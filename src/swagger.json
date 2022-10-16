@@ -17,19 +17,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "weight": {
-                                        "type": "number"
-                                    }
-                                },
-                                "example": {
-                                    "name": "load name sample",
-                                    "weight": "load weight sample"
-                                }
+                                "$ref": "#/definitions/Loads"
                             }
                         }
                     }
@@ -72,6 +60,158 @@
                         }
                     }
                 }
+            }
+        },
+        "/loads/import": {
+            "post": {
+                "tags": [
+                    "Loads"
+                ],
+                "summary": "create a load",
+                "description": "Create a new load",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/definitions/ImportLoads"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/companies": {
+            "post": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "create a company",
+                "description": "Create a new company",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Companies"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Company already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "List all companies",
+                "description": "List all companies",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "certification": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/companies/import": {
+            "post": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "create a company",
+                "description": "Create a new company",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/definitions/ImportCompanies"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ImportLoads": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "format": "binary"
+                }
+            }
+        },
+        "Loads": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "weight": {
+                    "type": "number"
+                }
+            },
+            "example": {
+                "name": "load name sample",
+                "weight": "load weight sample"
+            }
+        },
+        "ImportCompanies": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "format": "binary"
+                }
+            }
+        },
+        "Companies": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "certification": {
+                    "type": "boolean"
+                }
+            },
+            "example": {
+                "name": "company name sample",
+                "certification": true
             }
         }
     }

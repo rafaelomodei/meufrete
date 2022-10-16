@@ -163,6 +163,32 @@
                     }
                 }
             }
+        },
+        "/drivers": {
+            "post": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "create a driver",
+                "description": "Create a new driver",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Drivers"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Driver already exists"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -212,6 +238,29 @@
             "example": {
                 "name": "company name sample",
                 "certification": true
+            }
+        },
+        "Drivers": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "driverLicense": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "name": "driver name sample",
+                "email": "email name sample",
+                "password": "password name sample",
+                "driverLicense": "driver license name sample"
             }
         }
     }

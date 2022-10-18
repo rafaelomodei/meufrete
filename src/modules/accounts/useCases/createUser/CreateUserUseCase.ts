@@ -1,26 +1,26 @@
 import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcrypt';
-import { IDriversRepository } from '../../repositories/IUserRepositories';
-import { ICreateDriverDTO } from '../../dtos/ICreateDriverDTO';
+import { IUsersRepository } from '../../repositories/IUserRepositories';
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { AppError } from '../../../../errors/AppErrors';
 
 @injectable()
-class CreateDriverUseCase {
+class CreateUserUseCase {
   constructor(
-    @inject('DriversRepository')
-    private driversRepository: IDriversRepository
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
   ) {}
 
-  async execute(data: ICreateDriverDTO): Promise<void> {
+  async execute(data: ICreateUserDTO): Promise<void> {
     const { name, email, password, driverLicense } = data;
 
-    const emailDriver = email.toLowerCase();
-    const driverAlreadyExists = await this.driversRepository.findByEmail(emailDriver);
-    if (driverAlreadyExists) throw new AppError('Driver already exists', 409);
+    const emailUser = email.toLowerCase();
+    const userAlreadyExists = await this.usersRepository.findByEmail(emailUser);
+    if (userAlreadyExists) throw new AppError('Driver already exists', 409);
 
     const passwordHash = await hash(password, 8);
 
-    await this.driversRepository.create({
+    await this.usersRepository.create({
       name,
       password: passwordHash,
       email,
@@ -29,4 +29,4 @@ class CreateDriverUseCase {
   }
 }
 
-export { CreateDriverUseCase };
+export { CreateUserUseCase };

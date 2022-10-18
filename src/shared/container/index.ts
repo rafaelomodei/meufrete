@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
-import { DriversRepository } from '../../modules/accounts/repositories/implementations/UserRepository';
-import { IDriversRepository } from '../../modules/accounts/repositories/IUserRepositories';
+import { UsersRepository } from '../../modules/accounts/repositories/implementations/UserRepository';
+import { IUsersRepository } from '../../modules/accounts/repositories/IUserRepositories';
 import { ICompaniesRepository } from '../../modules/companies/repositories/ICompaniesRepositories';
 import { CompaniesRepository } from '../../modules/companies/repositories/implementations/CompaniesRepository';
 import { ILoadsRepository } from '../../modules/loads/repositories/ILoadsRepositories';
@@ -16,8 +16,8 @@ container.registerSingleton<ICompaniesRepository>(
   CompaniesRepository
 );
 
-container.registerSingleton<IDriversRepository>(
-  'DriversRepository',
-  DriversRepository
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository
 );
 

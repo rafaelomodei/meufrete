@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { AuthenticateDriverUseCase } from './AuthenticateDriverUseCase';
+import { AuthenticateUsersUseCase } from './AuthenticateUserUseCase';
 
-class AuthenticateDriverController {
+class AuthenticateUsersController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
-    const authenticateUseCase = container.resolve(AuthenticateDriverUseCase);
+    const authenticateUseCase = container.resolve(AuthenticateUsersUseCase);
     const token = await authenticateUseCase.execute({
       email,
       password,
@@ -16,4 +16,4 @@ class AuthenticateDriverController {
   }
 }
 
-export { AuthenticateDriverController };
+export { AuthenticateUsersController };

@@ -1,10 +1,10 @@
-import { ICreateDriverDTO } from "../dtos/ICreateDriverDTO";
-import { Driver } from "../entities/Driver";
+import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
+import { User } from "../entities/User";
 
-interface IDriversRepository {
-  create(data: ICreateDriverDTO): Promise<void>;
-  findByEmail(email: string): Promise<Driver>;
-  findById(id: string): Promise<Driver>;
+interface IUsersRepository {
+  create(data: ICreateUserDTO): Promise<void>;
+  findByEmail(email: string): Promise<User>;
+  findById(id: string): Promise<User>;
 }
 
-export { IDriversRepository };
+export { IUsersRepository };

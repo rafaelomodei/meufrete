@@ -2,7 +2,7 @@ import { compare } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
 import { AppError } from '../../../../errors/AppErrors';
-import { IDriversRepository } from '../../repositories/IUserRepositories';
+import { IUsersRepository } from '../../repositories/IUserRepositories';
 
 interface IResquest {
   email: string;
@@ -18,32 +18,32 @@ interface IResposen {
 }
 
 @injectable()
-class AuthenticateDriverUseCase {
+class AuthenticateUsersUseCase {
   constructor(
-    @inject('DriversRepository')
-    private driversRepository: IDriversRepository
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
   ) {}
 
   async execute({ email, password }: IResquest): Promise<IResposen> {
-    const driver = await this.driversRepository.findByEmail(email);
-    if (!driver) throw new AppError('Email or password incorrect', 401);
+    const user = await this.usersRepository.findByEmail(email);
+    if (!user) throw new AppError('Email or password incorrect', 401);
 
-    const passwordMarch = await compare(password, driver.password);
+    const passwordMarch = await compare(password, user.password);
     if (!passwordMarch) throw new AppError('Email or password incorrect', 401);
 
     const token = sign({}, '2882a785cc81943344d27f105c35bc0f', {
-      subject: driver.id,
+      subject: user.id,
       expiresIn: '1d',
     });
 
     return {
       user: {
-        name: driver.name,
-        email: driver.email,
+        name: user.name,
+        email: user.email,
       },
       token,
     };
   }
 }
 
-export { AuthenticateDriverUseCase };
+export { AuthenticateUsersUseCase };

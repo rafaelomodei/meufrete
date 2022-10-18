@@ -11,7 +11,7 @@ const AppDataSource = new DataSource({
   entities: [
     './src/modules/loads/entities/Load.ts',
     './src/modules/companies/entities/Company.ts',
-    './src/modules/accounts/entities/Driver.ts',
+    './src/modules/accounts/entities/User.ts',
   ],
 });
 

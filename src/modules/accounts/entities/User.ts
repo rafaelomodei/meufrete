@@ -1,8 +1,8 @@
 import { v4 as uuid } from 'uuid';
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity('drivers')
-class Driver {
+@Entity('users')
+class User {
   @PrimaryColumn()
   id?: string;
 
@@ -28,4 +28,4 @@ class Driver {
   }
 }
 
-export { Driver };
+export { User };

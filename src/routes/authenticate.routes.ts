@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { AuthenticateDriverController } from '../modules/accounts/useCases/authenticaterUser/AuthenticateDriverController';
+import { AuthenticateUsersController } from '../modules/accounts/useCases/authenticaterUser/AuthenticateUserController';
 
 const authenticateRoutes = Router();
 
-const createDriverController = new AuthenticateDriverController();
+const createUsersController = new AuthenticateUsersController();
 
-authenticateRoutes.post('/session', createDriverController.handle);
+authenticateRoutes.post('/session', createUsersController.handle);
 
 export { authenticateRoutes };

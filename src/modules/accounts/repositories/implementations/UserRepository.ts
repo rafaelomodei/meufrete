@@ -1,37 +1,37 @@
 import AppDataSource from '../../../../database/dataSource';
 import { Repository } from 'typeorm';
-import { IDriversRepository } from '../IUserRepositories';
-import { Driver } from '../../entities/Driver';
-import { ICreateDriverDTO } from '../../dtos/ICreateDriverDTO';
+import { IUsersRepository } from '../IUserRepositories';
+import { User } from '../../entities/User';
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 
-class DriversRepository implements IDriversRepository {
-  private repository: Repository<Driver>;
+class UsersRepository implements IUsersRepository {
+  private repository: Repository<User>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(Driver);
+    this.repository = AppDataSource.getRepository(User);
   }
 
-  async create(data: ICreateDriverDTO): Promise<void> {
+  async create(data: ICreateUserDTO): Promise<void> {
     const { name, email, password, driverLicense } = data;
-    const driver = this.repository.create({
+    const user = this.repository.create({
       name,
       email,
       password,
       driverLicense,
     });
 
-    await this.repository.save(driver);
+    await this.repository.save(user);
   }
 
-  async findByEmail(email: string): Promise<Driver> {
-    const driver = await this.repository.findOne({
+  async findByEmail(email: string): Promise<User> {
+    const user = await this.repository.findOne({
       where: { email },
     });
 
-    return driver;
+    return user;
   }
 
-  async findById(id: string): Promise<Driver> {
+  async findById(id: string): Promise<User> {
     const user = await this.repository.findOne({
       where: { id },
     });
@@ -40,4 +40,4 @@ class DriversRepository implements IDriversRepository {
   }
 }
 
-export { DriversRepository };
+export { UsersRepository };

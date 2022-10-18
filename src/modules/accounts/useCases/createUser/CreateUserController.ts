@@ -1,12 +1,12 @@
 import { Response, Request } from 'express';
 import { container } from 'tsyringe';
-import { CreateDriverUseCase } from './CreateUserUseCase';
+import { CreateUserUseCase } from './CreateUserUseCase';
 
-class CreateDriverController {
+class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, email, password, driverLicense } = request.body;
 
-    const createDriverUseCase = container.resolve(CreateDriverUseCase);
+    const createDriverUseCase = container.resolve(CreateUserUseCase);
 
     await createDriverUseCase.execute({
       name,
@@ -19,4 +19,4 @@ class CreateDriverController {
   }
 }
 
-export { CreateDriverController };
+export { CreateUserController };

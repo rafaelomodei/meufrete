@@ -5,6 +5,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { CreateLoadController } from '../modules/loads/useCases/createLoad/CreateLoadController';
 import { ImportLoadController } from '../modules/loads/useCases/importLoad/ImportLoadController';
 import { ListLoadsController } from '../modules/loads/useCases/listLoads/ListLoadsController';
+import { DistanceMatrix } from '../services/DistanceMatrix';
 
 const loadsRoutes = Router();
 const upload = multer({
@@ -16,6 +17,7 @@ const listLoadsController = new ListLoadsController();
 const importLoadController = new ImportLoadController();
 
 loadsRoutes.use(ensureAuthenticated);
+
 loadsRoutes.post('/', createLoadController.handle);
 loadsRoutes.get('/', listLoadsController.handle);
 loadsRoutes.post(

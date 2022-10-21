@@ -7,6 +7,7 @@ import { router } from './routes';
 import './shared/container';
 import { AppError } from './errors/AppErrors';
 
+
 AppDataSource.initialize()
   .then(() => {
     console.log('Data Source has been initialized!');

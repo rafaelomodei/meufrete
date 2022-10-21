@@ -12,6 +12,7 @@ const AppDataSource = new DataSource({
     './src/modules/loads/entities/Load.ts',
     './src/modules/companies/entities/Company.ts',
     './src/modules/accounts/entities/User.ts',
+    './src/modules/route/entities/Route.ts',
   ],
 });
 

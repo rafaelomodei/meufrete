@@ -12,11 +12,19 @@ class RoutesRepository implements IRoutesRepository {
   }
 
   async create(data: ICreateRouteDTO): Promise<void> {
-    const { distance, originCity, destinationCity } = data;
+    const {
+      distance,
+      originCity,
+      destinationCity,
+      originCompany,
+      destinationCompany,
+    } = data;
     const route = this.repository.create({
       distance,
       originCity,
       destinationCity,
+      originCompany,
+      destinationCompany,
     });
 
     await this.repository.save(route);
@@ -28,6 +36,11 @@ class RoutesRepository implements IRoutesRepository {
     });
 
     return route;
+  }
+
+  async list(): Promise<Route[]> {
+    const routes = await this.repository.find();
+    return routes;
   }
 }
 

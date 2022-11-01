@@ -1,5 +1,13 @@
 import { v4 as uuid } from 'uuid';
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
+import { Company } from '../../companies/entities/Company';
 
 @Entity('routes')
 class Route {
@@ -14,6 +22,14 @@ class Route {
 
   @Column()
   destinationCity: string;
+
+  @OneToOne(() => Company, { eager: true })
+  @JoinColumn()
+  originCompany: Company;
+
+  @OneToOne(() => Company, { eager: true })
+  @JoinColumn()
+  destinationCompany: Company;
 
   @CreateDateColumn()
   createdAt: Date;

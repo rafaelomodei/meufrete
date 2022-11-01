@@ -5,10 +5,16 @@ import { ICreateRouteDTO } from '../../modules/route/dtos/ICreateRouteDTO';
 envConfig();
 const { env } = process;
 
+interface IRouteDistanceMatrix {
+  distance: number;
+  originCity: string;
+  destinationCity: string;
+}
+
 const DistanceMatrix = async (
   originCity: string,
   destinationCity: string
-): Promise<ICreateRouteDTO> => {
+): Promise<IRouteDistanceMatrix> => {
   try {
     const request = {
       origins: originCity,
@@ -22,7 +28,7 @@ const DistanceMatrix = async (
       `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${request.origins}&destinations=${request.destinations}&departure_time=${request.departureTime}&key=${request.key}`
     );
 
-    const route: ICreateRouteDTO = {
+    const route: IRouteDistanceMatrix = {
       distance: data.rows[0].elements[0].distance.value,
       originCity: data.origin_addresses[0].split(',')[0].split(' - ')[0],
       destinationCity: data.destination_addresses[0]

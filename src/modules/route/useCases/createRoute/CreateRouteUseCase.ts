@@ -10,12 +10,20 @@ class CreateRouteUseCase {
   ) {}
 
   async execute(data: ICreateRouteDTO): Promise<void> {
-    const { distance, originCity, destinationCity } = data;
+    const {
+      distance,
+      originCity,
+      destinationCity,
+      originCompany,
+      destinationCompany,
+    } = data;
 
     await this.routesRepository.create({
       distance,
       originCity,
       destinationCity,
+      originCompany,
+      destinationCompany,
     });
   }
 }

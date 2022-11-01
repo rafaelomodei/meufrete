@@ -2,11 +2,7 @@ import fs from 'fs';
 import { parse } from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
 import { CompaniesRepository } from '../../repositories/implementations/CompaniesRepository';
-
-interface IImportCompanies {
-  name: string;
-  certification: boolean;
-}
+import { ICompanyDTO } from '../../dtos/ICreateCompanyDTO';
 
 @injectable()
 class ImportCompanyUseCase {
@@ -15,19 +11,19 @@ class ImportCompanyUseCase {
     private companiesRepository: CompaniesRepository
   ) {}
 
-  loadCompanies(file: Express.Multer.File): Promise<IImportCompanies[]> {
+  loadCompanies(file: Express.Multer.File): Promise<ICompanyDTO[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
-      const companies: IImportCompanies[] = [];
+      const companies: ICompanyDTO[] = [];
 
       const parseFile = parse();
       stream.pipe(parseFile);
 
       parseFile
         .on('data', async (line) => {
-          const [name, certification] = line;
+          const [name, certification, listLoads] = line;
 
-          companies.push({ name, certification });
+          companies.push({ name, certification, listLoads });
         })
         .on('end', () => {
           resolve(companies);
@@ -41,11 +37,12 @@ class ImportCompanyUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     const companies = await this.loadCompanies(file);
     companies.map(async (company) => {
-      const { name, certification } = company;
+      const { name, certification, listLoads } = company;
 
       const existsCompany = await this.companiesRepository.findByName(name);
 
-      if (!existsCompany) await this.companiesRepository.create({ name, certification });
+      if (!existsCompany)
+        await this.companiesRepository.create({ name, certification, listLoads });
     });
   }
 }

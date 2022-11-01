@@ -1,12 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../errors/AppErrors';
 import { ICompaniesRepository } from '../../repositories/ICompaniesRepositories';
-
-interface IRequest {
-  name: string;
-  certification: boolean;
-}
-
+import { ICompanyDTO } from '../../dtos/ICreateCompanyDTO';
 @injectable()
 class CreateCompanyUseCase {
   constructor(
@@ -14,14 +9,14 @@ class CreateCompanyUseCase {
     private companiesRepository: ICompaniesRepository
   ) {}
 
-  async execute({ name, certification }: IRequest): Promise<void> {
+  async execute({ name, certification, listLoads }: ICompanyDTO): Promise<void> {
     const companyAlreadyExists = await this.companiesRepository.findByName(
       name
     );
 
     if (companyAlreadyExists) throw new AppError('company already exists', 409);
 
-    this.companiesRepository.create({ name, certification });
+    this.companiesRepository.create({ name, certification, listLoads });
   }
 }
 

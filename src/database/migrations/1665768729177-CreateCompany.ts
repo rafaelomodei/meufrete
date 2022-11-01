@@ -20,11 +20,23 @@ export class CreateCompany1665768729177 implements MigrationInterface {
             type: 'boolean',
           },
           {
+            name: 'loadsId',
+            type: 'uuid',
+          },
+          {
             name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
         ],
+        // foreignKeys: [
+        //   {
+        //     name: 'FKLoadsCompany',
+        //     referencedTableName: 'loads',
+        //     referencedColumnNames: ['id'],
+        //     columnNames: ['listLoads'],
+        //   },
+        // ],
       })
     );
   }

@@ -16,9 +16,9 @@ class Load {
   createdAt: Date;
 
   constructor() {
-      if(!this.id){
-          this.id = uuid();
-      }
+    if (!this.id) {
+      this.id = uuid();
+    }
   }
 }
 

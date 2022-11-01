@@ -1,14 +1,9 @@
 import { Company } from '../entities/Company';
-
-interface ICompanyDTO {
-  name: string;
-  certification: boolean;
-}
-
+import { ICompanyDTO} from '../dtos/ICreateCompanyDTO';
 interface ICompaniesRepository {
   findByName(name: string): Promise<Company>;
   list(): Promise<Company[]>;
-  create({ name, certification }: ICompanyDTO): Promise<void>;
+  create({ name, certification, listLoads }: ICompanyDTO): Promise<void>;
 }
 
 export { ICompaniesRepository, ICompanyDTO };

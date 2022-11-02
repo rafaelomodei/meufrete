@@ -19,20 +19,48 @@ O sistema meufrete.com, é uma plataforma, onde as companias podem cadastrar seu
 **Regra de Negócio**
 
 - [ ] Não deve ser possível cadastrar uma carga com o mesmo nome
-
 - [ ] Não deve ser possível alterar o nome da carga já cadastrada
-
-- [ ] O usuário responsável pelo cadastro deve ser um usuário da COMPANIA (Empresa).
-
+- [ ] A compania (empresa) é responsável pelo cadastro de uma nova carga.
 - [ ] A carga não precisa estar associada a uma compania
 
 ---
 
-# Compania
+## Compania
 
 **Requisitos Funcionais**
 
 **Requisitos Não Funcionais**
+
+**Regra de Negócio**
+
+---
+
+## Rota
+
+**Requisitos Funcionais**
+
+**Requisitos Não Funcionais**
+
+**Regra de Negócio**
+
+---
+
+## Frete
+
+### Lista de fretes 
+
+**Requisitos Funcionais**
+
+- [ ] Deve ser possivel listar todos os fretes disponíveis
+- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da carga
+- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da compania de origem
+- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da compania de destino
+- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da cidade de origem
+- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da carga de destino
+
+**Requisitos Não Funcionais**
+
+- [ ] O motorista precisa estar logado no sistema
 
 **Regra de Negócio**
 

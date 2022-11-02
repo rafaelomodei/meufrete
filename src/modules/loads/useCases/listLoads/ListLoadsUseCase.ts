@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { Load } from '../../entities/Load';
+import { Load } from '../../infra/typeorm/entities/Load';
 import { ILoadsRepository } from '../../repositories/ILoadsRepositories';
 
 import { calcularPrecoPrazo } from 'correios-brasil';

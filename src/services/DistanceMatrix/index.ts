@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { config as envConfig } from 'dotenv';
-import { AppError } from '../../errors/AppErrors';
-import { ICreateRouteDTO } from '../../modules/route/dtos/ICreateRouteDTO';
+import { AppError } from '../../shared/errors/AppErrors';
 envConfig();
 const { env } = process;
 

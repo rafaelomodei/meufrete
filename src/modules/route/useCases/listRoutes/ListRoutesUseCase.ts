@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { Route } from '../../entities/Route';
+import { Route } from '../../infra/typeorm/entities/Route';
 import { IRoutesRepository } from '../../repositories/IRouteRepositories';
 
 @injectable()

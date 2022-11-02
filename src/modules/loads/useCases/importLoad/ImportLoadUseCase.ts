@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { parse } from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
-import { LoadsRepository } from '../../repositories/implementations/LoadsRepository';
+import { LoadsRepository } from '../../infra/typeorm/repositories/LoadsRepository';
 
 interface IImportLoads {
   name: string;

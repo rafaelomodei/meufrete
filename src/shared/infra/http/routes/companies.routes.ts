@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import multer from 'multer';
 
-import { CreateCompanyController } from '../modules/companies/useCases/createCompany/CreateCompanyController';
-import { ImportCompanyController } from '../modules/companies/useCases/importCompany/ImportCompanyController';
-import { ListCompaniesController } from '../modules/companies/useCases/listCompany/ListCompaniesController';
+import { CreateCompanyController } from '../../../../modules/companies/useCases/createCompany/CreateCompanyController';
+import { ImportCompanyController } from '../../../../modules/companies/useCases/importCompany/ImportCompanyController';
+import { ListCompaniesController } from '../../../../modules/companies/useCases/listCompany/ListCompaniesController';
 
 const companiesRoutes = Router();
 const upload = multer({

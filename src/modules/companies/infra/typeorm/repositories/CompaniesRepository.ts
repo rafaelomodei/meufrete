@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
-import AppDataSource from '../../../../database/dataSource';
-import { Company } from '../../entities/Company';
-import { ICompaniesRepository, ICompanyDTO } from '../ICompaniesRepositories';
+import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
+import { Company } from '../entities/Company';
+import { ICompaniesRepository, ICompanyDTO } from '../../../repositories/ICompaniesRepositories';
 
 class CompaniesRepository implements ICompaniesRepository {
   private repository: Repository<Company>;

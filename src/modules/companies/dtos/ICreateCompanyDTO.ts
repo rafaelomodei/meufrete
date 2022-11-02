@@ -1,4 +1,4 @@
-import { Load } from "../../loads/entities/Load";
+import { Load } from "../../loads/infra/typeorm/entities/Load";
 
 interface ICompanyDTO {
   name: string;

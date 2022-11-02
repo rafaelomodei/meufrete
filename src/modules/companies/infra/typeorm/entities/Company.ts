@@ -8,7 +8,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
-import { Load } from '../../loads/entities/Load';
+import { Load } from '../../../../loads/infra/typeorm/entities/Load';
 
 @Entity('companies')
 class Company {

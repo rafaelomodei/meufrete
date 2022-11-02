@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { CreateRouterController } from '../modules/route/useCases/createRoute/CreateRouteController';
-import { ListRoutesController } from '../modules/route/useCases/listRoutes/ListRoutesController';
+import { CreateRouterController } from '../../../../modules/route/useCases/createRoute/CreateRouteController';
+import { ListRoutesController } from '../../../../modules/route/useCases/listRoutes/ListRoutesController';
 
 const routesRoutes = Router();
 

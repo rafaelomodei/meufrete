@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { parse } from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
-import { CompaniesRepository } from '../../repositories/implementations/CompaniesRepository';
+import { CompaniesRepository } from '../../infra/typeorm/repositories/CompaniesRepository';
 import { ICompanyDTO } from '../../dtos/ICreateCompanyDTO';
 
 @injectable()

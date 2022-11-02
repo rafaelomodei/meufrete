@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { Company } from '../../entities/Company';
+import { Company } from '../../infra/typeorm/entities/Company';
 import { ICompaniesRepository } from '../../repositories/ICompaniesRepositories';
 
 @injectable()

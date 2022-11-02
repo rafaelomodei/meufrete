@@ -7,7 +7,7 @@ import {
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
-import { Company } from '../../companies/entities/Company';
+import { Company } from '../../../../companies/infra/typeorm/entities/Company';
 
 @Entity('routes')
 class Route {

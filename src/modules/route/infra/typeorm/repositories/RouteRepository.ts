@@ -1,8 +1,9 @@
-import AppDataSource from '../../../../database/dataSource';
 import { Repository } from 'typeorm';
-import { IRoutesRepository } from '../IRouteRepositories';
-import { Route } from '../../entities/Route';
-import { ICreateRouteDTO } from '../../dtos/ICreateRouteDTO';
+import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
+import { ICreateRouteDTO } from '../../../dtos/ICreateRouteDTO';
+import { IRoutesRepository } from '../../../repositories/IRouteRepositories';
+import { Route } from '../entities/Route';
+
 
 class RoutesRepository implements IRoutesRepository {
   private repository: Repository<Route>;

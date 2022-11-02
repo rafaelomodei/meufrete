@@ -1,4 +1,4 @@
-import { Company } from '../../companies/entities/Company';
+import { Company } from '../../companies/infra/typeorm/entities/Company';
 
 interface ICreateRouteDTO {
   distance: number;

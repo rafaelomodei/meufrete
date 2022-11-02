@@ -1,5 +1,5 @@
 import { ICreateRouteDTO } from "../dtos/ICreateRouteDTO";
-import { Route } from "../entities/Route";
+import { Route } from "../infra/typeorm/entities/Route";
 
 interface IRoutesRepository {
   create(data: ICreateRouteDTO): Promise<void>;

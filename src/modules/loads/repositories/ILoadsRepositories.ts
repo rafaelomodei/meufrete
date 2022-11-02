@@ -1,4 +1,4 @@
-import { Load } from '../entities/Load';
+import { Load } from '../infra/typeorm/entities/Load';
 
 interface ILoadDTO {
   name: string;

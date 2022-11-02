@@ -1,12 +1,11 @@
-import AppDataSource from './database/dataSource';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
-import swaggerFile from './swagger.json';
+import AppDataSource from '../typeorm/dataSource';
+import { AppError } from '../../errors/AppErrors';
 import { router } from './routes';
-import './shared/container';
-import { AppError } from './errors/AppErrors';
-
+import swaggerFile from '../../../swagger.json';
+import './../../container';
 
 AppDataSource.initialize()
   .then(() => {

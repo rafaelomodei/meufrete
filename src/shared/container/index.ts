@@ -7,6 +7,8 @@ import { LoadsRepository } from '../../modules/loads/infra/typeorm/repositories/
 import { IRoutesRepository } from '../../modules/route/repositories/IRouteRepositories';
 import { UsersRepository } from '../../modules/accounts/infra/typeorm/repositories/UserRepository';
 import { RoutesRepository } from '../../modules/route/infra/typeorm/repositories/RouteRepository';
+import { FreightRepository } from '../../modules/freight/infra/typeorm/repositories/FreightRepository';
+import { IFreightRepository } from '../../modules/freight/repositories/IFreightRepositories';
 
 container.registerSingleton<ILoadsRepository>(
   'LoadsRepository',
@@ -26,4 +28,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IRoutesRepository>(
   'RoutesRepository',
   RoutesRepository
+);
+
+container.registerSingleton<IFreightRepository>(
+  'FreightsRepository',
+  FreightRepository
 );

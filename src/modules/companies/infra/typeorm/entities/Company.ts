@@ -4,10 +4,7 @@ import {
   PrimaryColumn,
   Column,
   JoinTable,
-  OneToMany,
   ManyToMany,
-  ManyToOne,
-  JoinColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { Load } from '../../../../loads/infra/typeorm/entities/Load';
@@ -30,9 +27,6 @@ class Company {
     inverseJoinColumns: [{ name: 'loadId' }],
   })
   loads: Load[];
-
-  // @Column()
-  // loadsId: [string];
 
   @CreateDateColumn()
   createdAt: Date;

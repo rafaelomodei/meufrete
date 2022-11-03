@@ -1,0 +1,39 @@
+import { Repository } from 'typeorm';
+import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
+import { ICreateJobDTO } from '../../../dtos/ICreateJobDTO';
+import { IJobsRepository } from '../../../repositories/IJobRepositories';
+import { Job } from '../entities/Job';
+
+class JobsRepository implements IJobsRepository {
+  private repository: Repository<Job>;
+
+  constructor() {
+    this.repository = AppDataSource.getRepository(Job);
+  }
+
+  async create(data: ICreateJobDTO): Promise<void> {
+    const { status, driver, freight } = data;
+    const job = this.repository.create({
+      status,
+      driver,
+      freight,
+    });
+
+    await this.repository.save(job);
+  }
+
+  async findById(id: string): Promise<Job> {
+    const job = await this.repository.findOne({
+      where: { id },
+    });
+
+    return job;
+  }
+
+  async list(): Promise<Job[]> {
+    const jobs = await this.repository.find();
+    return jobs;
+  }
+}
+
+export { JobsRepository };

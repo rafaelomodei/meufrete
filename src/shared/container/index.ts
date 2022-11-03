@@ -9,6 +9,8 @@ import { UsersRepository } from '../../modules/accounts/infra/typeorm/repositori
 import { RoutesRepository } from '../../modules/route/infra/typeorm/repositories/RouteRepository';
 import { FreightRepository } from '../../modules/freight/infra/typeorm/repositories/FreightRepository';
 import { IFreightRepository } from '../../modules/freight/repositories/IFreightRepositories';
+import { JobsRepository } from '../../modules/job/infra/typeorm/repositories/JobRepository';
+import { IJobsRepository } from '../../modules/job/repositories/IJobRepositories';
 
 container.registerSingleton<ILoadsRepository>(
   'LoadsRepository',
@@ -34,3 +36,5 @@ container.registerSingleton<IFreightRepository>(
   'FreightsRepository',
   FreightRepository
 );
+
+container.registerSingleton<IJobsRepository>('JobsRepository', JobsRepository);

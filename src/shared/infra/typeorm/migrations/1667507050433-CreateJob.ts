@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateFreight1667474818537 implements MigrationInterface {
+export class CreateJob1667507050433 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'freights',
+        name: 'jobs',
         columns: [
           {
             name: 'id',
@@ -12,19 +12,17 @@ export class CreateFreight1667474818537 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'price',
-            type: 'decimal',
-            isNullable: true,
+            name: 'status',
+            type: 'varchar',
           },
           {
-            name: 'routeId',
+            name: 'driverId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'loadId',
+            name: 'freightId',
             type: 'uuid',
-            isNullable: true,
           },
 
           {
@@ -38,6 +36,6 @@ export class CreateFreight1667474818537 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('freights');
+    await queryRunner.dropTable('jobs');
   }
 }

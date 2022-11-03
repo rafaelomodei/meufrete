@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
 import { Load } from '../entities/Load';
 import { ILoadsRepository } from '../../../repositories/ILoadsRepositories';
@@ -28,6 +28,13 @@ class LoadsRepository implements ILoadsRepository {
   async findByName(name: string): Promise<Load> {
     // const nameLoad = name.toLowerCase();
     const load = await this.repository.findOne({ where: { name } });
+
+    return load;
+  }
+
+  async findByIds(ids: string[]): Promise<Load[]> {
+    // const nameLoad = name.toLowerCase();
+    const load = await this.repository.find({ where: { id: In(ids) } });
 
     return load;
   }

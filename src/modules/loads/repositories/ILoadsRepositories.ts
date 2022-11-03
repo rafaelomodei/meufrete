@@ -5,6 +5,7 @@ interface ILoadsRepository {
   findByName(name: string): Promise<Load>;
   list(): Promise<Load[]>;
   create({ name, weight }: ILoadDTO): Promise<void>;
+  findByIds(ids: string[]): Promise<Load[]>;
 }
 
 export { ILoadsRepository };

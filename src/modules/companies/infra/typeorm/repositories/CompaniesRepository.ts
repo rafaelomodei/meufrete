@@ -1,7 +1,11 @@
 import { Repository } from 'typeorm';
 import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
 import { Company } from '../entities/Company';
-import { ICompaniesRepository, ICompanyDTO } from '../../../repositories/ICompaniesRepositories';
+import {
+  ICompaniesRepository,
+  ICompanyDTO,
+} from '../../../repositories/ICompaniesRepositories';
+import { Load } from '../../../../loads/infra/typeorm/entities/Load';
 
 class CompaniesRepository implements ICompaniesRepository {
   private repository: Repository<Company>;
@@ -10,8 +14,9 @@ class CompaniesRepository implements ICompaniesRepository {
     this.repository = AppDataSource.getRepository(Company);
   }
 
-  async create({ name, certification, loads }: ICompanyDTO): Promise<void> {
+  async create({ id, name, certification, loads }: ICompanyDTO): Promise<void> {
     const company = this.repository.create({
+      id,
       name,
       certification,
       loads,
@@ -33,6 +38,22 @@ class CompaniesRepository implements ICompaniesRepository {
 
     return company;
   }
+
+  async findById(id: string): Promise<Company> {
+    const company = await this.repository.findOne({
+      where: { id },
+    });
+
+    return company;
+  }
+
+  // async findByLoadId(id: string): Promise<Load> {
+  //   const load = await this.repository.findOne({
+  //     where: { loads },
+  //   });
+
+  //   return load;
+  // }
 }
 
 export { CompaniesRepository };

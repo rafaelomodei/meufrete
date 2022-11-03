@@ -1,9 +1,9 @@
-import { Load } from "../../loads/infra/typeorm/entities/Load";
+import { Load } from '../../loads/infra/typeorm/entities/Load';
 
 interface ICompanyDTO {
   name: string;
   certification: boolean;
-  listLoads: Load[];
+  loads: [Load];
 }
 
 export { ICompanyDTO };

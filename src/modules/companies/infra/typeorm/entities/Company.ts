@@ -6,6 +6,8 @@ import {
   JoinTable,
   OneToMany,
   ManyToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { Load } from '../../../../loads/infra/typeorm/entities/Load';
@@ -21,9 +23,16 @@ class Company {
   @Column()
   certification: boolean;
 
-  @ManyToMany((type) => Load, { eager: true })
-  @JoinTable()
-  listLoads: Load[];
+  @ManyToMany(() => Load, {eager: true})
+  @JoinTable({
+    name: 'companies_loads',
+    joinColumns: [{ name: 'companyId' }],
+    inverseJoinColumns: [{ name: 'loadId' }],
+  })
+  loads: Load[];
+
+  // @Column()
+  // loadsId: [string];
 
   @CreateDateColumn()
   createdAt: Date;

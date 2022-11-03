@@ -1,9 +1,5 @@
+import { ILoadDTO } from '../infra/typeorm/dtos/ICreateLoadDTO';
 import { Load } from '../infra/typeorm/entities/Load';
-
-interface ILoadDTO {
-  name: string;
-  weight: number;
-}
 
 interface ILoadsRepository {
   findByName(name: string): Promise<Load>;
@@ -11,4 +7,4 @@ interface ILoadsRepository {
   create({ name, weight }: ILoadDTO): Promise<void>;
 }
 
-export { ILoadsRepository, ILoadDTO };
+export { ILoadsRepository };

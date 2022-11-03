@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class CreateCompany1665768729177 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -22,6 +27,7 @@ export class CreateCompany1665768729177 implements MigrationInterface {
           {
             name: 'loadsId',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'createdAt',
@@ -29,14 +35,6 @@ export class CreateCompany1665768729177 implements MigrationInterface {
             default: 'now()',
           },
         ],
-        // foreignKeys: [
-        //   {
-        //     name: 'FKLoadsCompany',
-        //     referencedTableName: 'loads',
-        //     referencedColumnNames: ['id'],
-        //     columnNames: ['listLoads'],
-        //   },
-        // ],
       })
     );
   }

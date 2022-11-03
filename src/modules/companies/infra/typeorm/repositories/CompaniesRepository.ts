@@ -10,11 +10,11 @@ class CompaniesRepository implements ICompaniesRepository {
     this.repository = AppDataSource.getRepository(Company);
   }
 
-  async create({ name, certification, listLoads }: ICompanyDTO): Promise<void> {
+  async create({ name, certification, loads }: ICompanyDTO): Promise<void> {
     const company = this.repository.create({
       name,
       certification,
-      listLoads,
+      loads,
     });
 
     await this.repository.save(company);

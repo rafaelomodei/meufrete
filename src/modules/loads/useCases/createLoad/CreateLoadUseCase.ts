@@ -1,11 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppErrors';
+import { ILoadDTO } from '../../infra/typeorm/dtos/ICreateLoadDTO';
 import { ILoadsRepository } from '../../repositories/ILoadsRepositories';
-
-interface IRequest {
-  name: string;
-  weight: number;
-}
 
 @injectable()
 class CreateLoadUseCase {
@@ -14,7 +10,7 @@ class CreateLoadUseCase {
     private loadsRepository: ILoadsRepository
   ) {}
 
-  async execute({ name, weight }: IRequest): Promise<void> {
+  async execute({ name, weight }: ILoadDTO): Promise<void> {
     const loadAlreadyExists = await this.loadsRepository.findByName(name);
 
     if (loadAlreadyExists) throw new AppError('load already exists', 409);

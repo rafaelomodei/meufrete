@@ -4,12 +4,10 @@ import { CreateCompanyUseCase } from './CreateCompanyUseCase';
 
 class CreateCompanyController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, certification, listLoads } = request.body;
-
-    console.info(listLoads)
+    const { name, certification, loads } = request.body;
 
     const createCompanyUseCase = container.resolve(CreateCompanyUseCase);
-    await createCompanyUseCase.execute({ name, certification, listLoads });
+    await createCompanyUseCase.execute({ name, certification, loads });
 
     return response.status(201).send();
   }

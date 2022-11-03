@@ -1,7 +1,8 @@
 import { Repository } from 'typeorm';
 import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
 import { Load } from '../entities/Load';
-import { ILoadsRepository, ILoadDTO } from '../../../repositories/ILoadsRepositories';
+import { ILoadsRepository } from '../../../repositories/ILoadsRepositories';
+import { ILoadDTO } from '../dtos/ICreateLoadDTO';
 
 class LoadsRepository implements ILoadsRepository {
   private repository: Repository<Load>;

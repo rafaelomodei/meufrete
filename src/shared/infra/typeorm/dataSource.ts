@@ -8,12 +8,7 @@ const AppDataSource = new DataSource({
   password: 'omodei',
   database: 'meufretecom',
   migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
-  entities: [
-    './src/modules/loads/infra/typeorm/entities/Load.ts',
-    './src/modules/companies/infra/typeorm/entities/Company.ts',
-    './src/modules/accounts/infra/typeorm/entities/User.ts',
-    './src/modules/route/infra/typeorm/entities/Route.ts',
-  ],
+  entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
 });
 
 export default AppDataSource;

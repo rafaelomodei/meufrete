@@ -2,11 +2,7 @@ import fs from 'fs';
 import { parse } from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
 import { LoadsRepository } from '../../infra/typeorm/repositories/LoadsRepository';
-
-interface IImportLoads {
-  name: string;
-  weight: number;
-}
+import { ILoadDTO } from '../../infra/typeorm/dtos/ICreateLoadDTO';
 
 @injectable()
 class ImportLoadUseCase {
@@ -15,10 +11,10 @@ class ImportLoadUseCase {
     private loadsRepository: LoadsRepository
   ) {}
 
-  loadLoads(file: Express.Multer.File): Promise<IImportLoads[]> {
+  loadLoads(file: Express.Multer.File): Promise<ILoadDTO[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
-      const loads: IImportLoads[] = [];
+      const loads: ILoadDTO[] = [];
 
       const parseFile = parse();
       stream.pipe(parseFile);

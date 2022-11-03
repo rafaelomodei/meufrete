@@ -21,9 +21,9 @@ class ImportCompanyUseCase {
 
       parseFile
         .on('data', async (line) => {
-          const [name, certification, listLoads] = line;
+          const [name, certification, loads] = line;
 
-          companies.push({ name, certification, listLoads });
+          companies.push({ name, certification, loads });
         })
         .on('end', () => {
           resolve(companies);
@@ -37,12 +37,12 @@ class ImportCompanyUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     const companies = await this.loadCompanies(file);
     companies.map(async (company) => {
-      const { name, certification, listLoads } = company;
+      const { name, certification, loads } = company;
 
       const existsCompany = await this.companiesRepository.findByName(name);
 
       if (!existsCompany)
-        await this.companiesRepository.create({ name, certification, listLoads });
+        await this.companiesRepository.create({ name, certification, loads });
     });
   }
 }

@@ -3,9 +3,8 @@ import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
 import { Company } from '../entities/Company';
 import {
   ICompaniesRepository,
-  ICompanyDTO,
 } from '../../../repositories/ICompaniesRepositories';
-import { Load } from '../../../../loads/infra/typeorm/entities/Load';
+import { ICompanyDTO } from '../../../dtos/ICreateCompanyDTO';
 
 class CompaniesRepository implements ICompaniesRepository {
   private repository: Repository<Company>;

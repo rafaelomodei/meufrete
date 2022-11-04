@@ -7,4 +7,9 @@ interface ICreateJobDTO {
   freight: Freight;
 }
 
-export { ICreateJobDTO };
+interface IJoinJobDTO {
+  jobId: string;
+  driverId: string;
+}
+
+export { ICreateJobDTO, IJoinJobDTO };

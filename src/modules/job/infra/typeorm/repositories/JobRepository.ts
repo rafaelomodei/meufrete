@@ -22,6 +22,16 @@ class JobsRepository implements IJobsRepository {
     await this.repository.save(job);
   }
 
+  async remove(id: string): Promise<Job> {
+    const job = await this.repository.findOne({
+      where: { id },
+    });
+
+    await this.repository.remove(job);
+
+    return job;
+  }
+
   async findById(id: string): Promise<Job> {
     const job = await this.repository.findOne({
       where: { id },

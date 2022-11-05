@@ -18,10 +18,11 @@ const importLoadController = new ImportLoadController();
 
 loadsRoutes.use(ensureAuthenticated);
 
-loadsRoutes.post('/', createLoadController.handle);
-loadsRoutes.get('/', listLoadsController.handle);
+loadsRoutes.post('/', ensureAuthenticated, createLoadController.handle);
+loadsRoutes.get('/', ensureAuthenticated, listLoadsController.handle);
 loadsRoutes.post(
   '/import',
+  ensureAuthenticated,
   upload.single('file'),
   (request: Request, response: Response) => {
     return importLoadController.handle(request, response);

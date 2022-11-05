@@ -17,10 +17,11 @@ const importCompanyController = new ImportCompanyController();
 const listCompaniesController = new ListCompaniesController();
 const createLoadsToCompanyController = new CreateLoadsToCompanyController();
 
-companiesRoutes.get('/', listCompaniesController.handle);
-companiesRoutes.post('/', createCompanyController.handle);
+companiesRoutes.get('/', ensureAuthenticated, listCompaniesController.handle);
+companiesRoutes.post('/', ensureAuthenticated, createCompanyController.handle);
 companiesRoutes.post(
   '/import',
+  ensureAuthenticated,
   upload.single('file'),
   (request: Request, response: Response) => {
     return importCompanyController.handle(request, response);

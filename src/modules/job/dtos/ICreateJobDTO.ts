@@ -12,4 +12,17 @@ interface IJoinJobDTO {
   driverId: string;
 }
 
-export { ICreateJobDTO, IJoinJobDTO };
+interface ISearchJobDTO {
+  priceStart?: number;
+  priceEnd?: number;
+  weightStart?: number;
+  weightEnd?: number;
+  distanceStart?: number;
+  distanceEnd?: number;
+  originCity?: string;
+  destinationCity?: string;
+  originCompany?: string;
+  destinationCompany?: string;
+}
+
+export { ICreateJobDTO, IJoinJobDTO, ISearchJobDTO };

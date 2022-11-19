@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-19T23:31:12.654Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="IsfvqJnDGfIikcz7B7tQ" version="20.5.3" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-11-19T23:31:35.142Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="RnAlA5J073dgKyU9uYHu" version="20.5.3" type="github" pages="2">
   <diagram id="M3pcUj_e8ZGcJJ1h0OU3" name="Diagrama de Clase">
     <mxGraphModel dx="1335" dy="1883" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -188,7 +188,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="1bz0O799h8V0yVq-FYLp" name="Diagrama de Casos de Uso">
-    <mxGraphModel dx="1335" dy="714" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1578" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -289,6 +289,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="R5DaQg2-dEpTNpGCotOX-10" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R5DaQg2-dEpTNpGCotOX-3">
+          <mxGeometry x="-0.579" y="25" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="QoGKlaLHUCBEnwmlQGfR-8" value="&lt;div&gt;Manter Motorista&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="130" y="201" width="120" height="80" as="geometry" />
         </mxCell>
@@ -300,6 +305,11 @@
             <Array as="points">
               <mxPoint x="630" y="382" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R5DaQg2-dEpTNpGCotOX-9" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R5DaQg2-dEpTNpGCotOX-8">
+          <mxGeometry x="-0.4973" y="-29" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="R5DaQg2-dEpTNpGCotOX-5" value="&lt;div&gt;Manter Frete&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">

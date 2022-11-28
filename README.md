@@ -21,7 +21,6 @@ O sistema meufrete.com, é uma plataforma, onde as companias podem cadastrar seu
 - [ ] Não deve ser possível cadastrar uma carga com o mesmo nome
 - [ ] Não deve ser possível alterar o nome da carga para um nome já cadastrado
 - [ ] A compania (empresa) é responsável pelo cadastro de uma nova carga.
-- [ ] A carga não precisa estar associada a uma compania
 
 ---
 

@@ -16,7 +16,7 @@ class User {
   password: string;
 
   @Column()
-  driverLicense: string;
+  driverLicense?: string;
 
   @CreateDateColumn()
   createdAt: Date;

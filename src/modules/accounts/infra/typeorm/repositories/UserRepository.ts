@@ -38,6 +38,14 @@ class UsersRepository implements IUsersRepository {
 
     return user;
   }
+
+  async findByDriverLicense(driverLicense: string): Promise<User> {
+    const user = await this.repository.findOne({
+      where: { driverLicense },
+    });
+
+    return user;
+  }
 }
 
 export { UsersRepository };

@@ -16,14 +16,19 @@ class CreateUserUseCase {
 
     const emailUser = email.toLowerCase();
     const userAlreadyExists = await this.usersRepository.findByEmail(emailUser);
-    if (userAlreadyExists) throw new AppError('Driver already exists', 409);
+    const driverAlreadyExists = await this.usersRepository.findByDriverLicense(
+      driverLicense
+    );
+
+    if (userAlreadyExists) throw new AppError('User already exists', 409);
+    if (driverAlreadyExists) throw new AppError('Driver already exists', 409);
 
     const passwordHash = await hash(password, 8);
 
     await this.usersRepository.create({
-      name,
+      name: name.toLowerCase(),
       password: passwordHash,
-      email,
+      email: email.toLowerCase(),
       driverLicense,
     });
   }

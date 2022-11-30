@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import { AppError } from '../../../errors/AppErrors';
 import { UsersRepository } from '../../../../modules/accounts/infra/typeorm/repositories/UserRepository';
+import { config as envConfig } from 'dotenv';
+envConfig();
+const { env } = process;
 
 interface IPayload {
   sub: string;
@@ -18,10 +21,7 @@ export async function ensureAuthenticated(
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: user_id } = verify(
-      token,
-      '2882a785cc81943344d27f105c35bc0f'
-    ) as IPayload;
+    const { sub: user_id } = verify(token, `${env.KEY_JWT}`) as IPayload;
 
     const usersRepository = new UsersRepository();
     const user = usersRepository.findById(user_id);

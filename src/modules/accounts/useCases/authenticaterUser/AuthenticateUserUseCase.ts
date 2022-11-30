@@ -3,6 +3,9 @@ import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
 import { AppError } from '../../../../shared/errors/AppErrors';
 import { IUsersRepository } from '../../repositories/IUserRepositories';
+import { config as envConfig } from 'dotenv';
+envConfig();
+const { env } = process;
 
 interface IResquest {
   email: string;
@@ -31,7 +34,7 @@ class AuthenticateUsersUseCase {
     const passwordMarch = await compare(password, user.password);
     if (!passwordMarch) throw new AppError('Email or password incorrect', 401);
 
-    const token = sign({}, '2882a785cc81943344d27f105c35bc0f', {
+    const token = sign({}, `${env.KEY_JWT}`, {
       subject: user.id,
       expiresIn: '1d',
     });

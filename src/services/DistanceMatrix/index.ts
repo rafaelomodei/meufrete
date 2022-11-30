@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { config as envConfig } from 'dotenv';
 import { AppError } from '../../shared/errors/AppErrors';
+import { config as envConfig } from 'dotenv';
 envConfig();
 const { env } = process;
 

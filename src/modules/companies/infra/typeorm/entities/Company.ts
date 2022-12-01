@@ -23,7 +23,7 @@ class Company {
   @Column()
   certification: boolean;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, { eager: true })
   @JoinColumn()
   user?: User;
 

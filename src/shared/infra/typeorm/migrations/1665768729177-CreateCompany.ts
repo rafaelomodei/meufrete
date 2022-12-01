@@ -30,6 +30,11 @@ export class CreateCompany1665768729177 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'userId',
+            type: 'uuid',
+            isNullable: true,
+          },
+          {
             name: 'createdAt',
             type: 'timestamp',
             default: 'now()',

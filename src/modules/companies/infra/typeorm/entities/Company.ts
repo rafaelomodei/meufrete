@@ -5,8 +5,11 @@ import {
   Column,
   JoinTable,
   ManyToMany,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { User } from '../../../../accounts/infra/typeorm/entities/User';
 import { Load } from '../../../../loads/infra/typeorm/entities/Load';
 
 @Entity('companies')
@@ -20,7 +23,11 @@ class Company {
   @Column()
   certification: boolean;
 
-  @ManyToMany(() => Load, {eager: true})
+  @OneToOne(() => User)
+  @JoinColumn()
+  user?: User;
+
+  @ManyToMany(() => Load, { eager: true, cascade: true })
   @JoinTable({
     name: 'companies_loads',
     joinColumns: [{ name: 'companyId' }],

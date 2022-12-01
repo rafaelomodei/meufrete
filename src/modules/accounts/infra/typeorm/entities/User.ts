@@ -1,5 +1,13 @@
 import { v4 as uuid } from 'uuid';
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
+import { Company } from '../../../../companies/infra/typeorm/entities/Company';
 
 @Entity('users')
 class User {
@@ -17,6 +25,9 @@ class User {
 
   @Column()
   driverLicense?: string;
+
+  @OneToOne(() => Company)
+  company?: Company;
 
   @CreateDateColumn()
   createdAt: Date;

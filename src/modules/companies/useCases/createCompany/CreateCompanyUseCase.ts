@@ -9,14 +9,16 @@ class CreateCompanyUseCase {
     private companiesRepository: ICompaniesRepository
   ) {}
 
-  async execute({ name, certification, loads }: ICompanyDTO): Promise<void> {
+  async execute(data: ICompanyDTO): Promise<void> {
+    const { name, certification, loads, user } = data;
+
     const companyAlreadyExists = await this.companiesRepository.findByName(
       name
     );
 
     if (companyAlreadyExists) throw new AppError('company already exists', 409);
 
-    this.companiesRepository.create({ name, certification, loads });
+    this.companiesRepository.create({ name, certification, loads, user });
   }
 }
 

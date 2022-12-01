@@ -1,9 +1,7 @@
 import { Repository } from 'typeorm';
 import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
 import { Company } from '../entities/Company';
-import {
-  ICompaniesRepository,
-} from '../../../repositories/ICompaniesRepositories';
+import { ICompaniesRepository } from '../../../repositories/ICompaniesRepositories';
 import { ICompanyDTO } from '../../../dtos/ICreateCompanyDTO';
 
 class CompaniesRepository implements ICompaniesRepository {
@@ -13,12 +11,15 @@ class CompaniesRepository implements ICompaniesRepository {
     this.repository = AppDataSource.getRepository(Company);
   }
 
-  async create({ id, name, certification, loads }: ICompanyDTO): Promise<void> {
+  async create(data: ICompanyDTO): Promise<void> {
+    const { id, name, certification, loads, user } = data;
+
     const company = this.repository.create({
       id,
       name,
       certification,
       loads,
+      user,
     });
 
     await this.repository.save(company);

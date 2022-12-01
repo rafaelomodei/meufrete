@@ -3,7 +3,7 @@ import { ICompanyDTO } from '../dtos/ICreateCompanyDTO';
 interface ICompaniesRepository {
   findByName(name: string): Promise<Company>;
   list(): Promise<Company[]>;
-  create({ id, name, certification, loads }: ICompanyDTO): Promise<void>;
+  create(data: ICompanyDTO): Promise<void>;
   findById(id: string): Promise<Company>;
 }
 

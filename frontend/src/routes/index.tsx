@@ -1,8 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Home } from '../pages/private/home';
-import { CreateAccount } from '../pages/public/createAccount';
 import { Loading } from '../components/organisms/loading';
 import Login from '../pages/public/login';
+import CreateAccount from '../pages/public/createAccount';
 
 const AppRoutes = () => {
   return (

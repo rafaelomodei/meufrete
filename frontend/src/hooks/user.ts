@@ -5,7 +5,7 @@ import api from '../services/api';
 export const useUser = () => {
   const [profile, setProfile] = useState<IUser>();
 
-  const authenticaterUser = useCallback(
+  const authenticateUser = useCallback(
     async (email: string, password: string) => {
       const { status, data } = await api.post('/session', {
         email,
@@ -19,5 +19,21 @@ export const useUser = () => {
     []
   );
 
-  return { profile, authenticaterUser };
+  const createUser = useCallback(async (dataForm: IUser) => {
+    const { name, email, password, driverLicense, company } = dataForm;
+
+    const { status, data } = await api.post('/users', {
+      name,
+      email,
+      password,
+      driverLicense,
+      company,
+    });
+
+    console.info('data: ', data);
+    if (status !== 201) throw new Error();
+    setProfile(data);
+  }, []);
+
+  return { profile, authenticateUser, createUser };
 };

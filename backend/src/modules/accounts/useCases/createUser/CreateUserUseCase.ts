@@ -11,10 +11,8 @@ class CreateUserUseCase {
     private usersRepository: IUsersRepository
   ) {}
 
-  async execute(data: ICreateUserDTO): Promise<void> {
+  async execute(data: ICreateUserDTO): Promise<ICreateUserDTO> {
     const { name, email, password, driverLicense, company } = data;
-
-    
 
     const emailUser = email.toLowerCase();
     const userAlreadyExists = await this.usersRepository.findByEmail(emailUser);
@@ -26,14 +24,16 @@ class CreateUserUseCase {
     if (driverAlreadyExists) throw new AppError('Driver already exists', 409);
 
     const passwordHash = await hash(password, 8);
-
-    await this.usersRepository.create({
+    const user = {
       name: name.toLowerCase(),
       password: passwordHash,
       email: email.toLowerCase(),
       driverLicense,
       company,
-    });
+    };
+    await this.usersRepository.create(user);
+
+    return user;
   }
 }
 

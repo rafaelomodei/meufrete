@@ -8,7 +8,7 @@ class CreateUserController {
 
     const createDriverUseCase = container.resolve(CreateUserUseCase);
 
-    await createDriverUseCase.execute({
+    const user = await createDriverUseCase.execute({
       name,
       email,
       password,
@@ -16,7 +16,7 @@ class CreateUserController {
       company,
     });
 
-    return response.status(201).send();
+    return response.status(201).json(user);
   }
 }
 

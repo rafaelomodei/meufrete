@@ -4,10 +4,6 @@ import {
   Center,
   Divider,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Heading,
   Image,
   InputGroup,
@@ -27,7 +23,7 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { profile, authenticaterUser } = useUser();
+  const { profile, authenticateUser } = useUser();
 
   useEffect(() => {
     if (profile) window.location.href = URL_HOME;
@@ -37,7 +33,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const handleAuthenticationUser = async () => {
-    await authenticaterUser(email, password);
+    await authenticateUser(email, password);
   };
   const handleChangeEmail = (event: any) => setEmail(event.target.value);
   const handleChangePassword = (event: any) => setPassword(event.target.value);
@@ -91,7 +87,7 @@ const Login = () => {
                       bg='none'
                       bgHover='none'
                       bgActive='none'
-                      icon={showPassword ? <BiHide /> : <BiShow />}
+                      icon={showPassword ? <BiShow /> : <BiHide />}
                     >
                       {showPassword ? 'Hide' : 'Show'}
                     </IconButton>
@@ -105,7 +101,7 @@ const Login = () => {
                 variant='link'
                 onClick={() => (window.location.href = URL_CREATE_ACCOUNT)}
               >
-                Cadastrar-se
+                Criar conta
               </Button>
               <Button color={`${theme.colors.brand.text}`} variant='link'>
                 Esqueci a senha

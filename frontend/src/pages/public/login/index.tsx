@@ -4,26 +4,44 @@ import {
   Center,
   Divider,
   Flex,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
   Heading,
   Image,
   InputGroup,
   InputRightElement,
   Stack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { img, svg } from '../../../assets';
 import { Input } from '../../../components/molecules/Input/styles';
 import { theme } from '../../../utils/themes';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { IconButton } from '../../../components/molecules/iconButton/styles';
 import { URL_CREATE_ACCOUNT, URL_HOME } from '../../../utils/const';
+import { useUser } from '../../../hooks/user';
 
-export const Login = () => {
+const Login = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { profile, authenticaterUser } = useUser();
+
+  useEffect(() => {
+    if (profile) window.location.href = URL_HOME;
+  }, [profile]);
 
   const taggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+  const handleAuthenticationUser = async () => {
+    await authenticaterUser(email, password);
+  };
+  const handleChangeEmail = (event: any) => setEmail(event.target.value);
+  const handleChangePassword = (event: any) => setPassword(event.target.value);
+
   return (
     <Flex h='100vh' width='100%'>
       <Box w='70%'>
@@ -49,7 +67,11 @@ export const Login = () => {
                 <Heading ml={4} size='sx'>
                   E-mail
                 </Heading>
-                <Input placeholder='example@meufrete.com' />
+                <Input
+                  placeholder='example@meufrete.com'
+                  onChange={handleChangeEmail}
+                  value={email}
+                />
               </div>
               <Divider />
               <div>
@@ -60,6 +82,7 @@ export const Login = () => {
                   <Input
                     placeholder='Senha'
                     type={showPassword ? 'text' : 'password'}
+                    onChange={handleChangePassword}
                   />
                   <InputRightElement width='4.5rem'>
                     <IconButton
@@ -102,7 +125,7 @@ export const Login = () => {
               w='100%'
               h='48px'
               mt={8}
-              onClick={() => (window.location.href = URL_HOME)}
+              onClick={handleAuthenticationUser}
             >
               Entrar
             </Button>
@@ -112,3 +135,5 @@ export const Login = () => {
     </Flex>
   );
 };
+
+export default Login;

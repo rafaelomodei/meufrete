@@ -5,6 +5,7 @@ import AppDataSource from '../typeorm/dataSource';
 import { AppError } from '../../errors/AppErrors';
 import { router } from './routes';
 import swaggerFile from '../../../swagger.json';
+import cors from 'cors';
 import './../../container';
 
 AppDataSource.initialize()
@@ -16,6 +17,8 @@ AppDataSource.initialize()
   });
 
 const app = express();
+
+app.use(cors({ origin: '*' }));
 
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));

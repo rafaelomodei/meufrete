@@ -9,8 +9,9 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
+  useToast,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { img, svg } from '../../../assets';
 import { Input } from '../../../components/molecules/Input/styles';
 import { theme } from '../../../utils/themes';
@@ -18,22 +19,40 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { IconButton } from '../../../components/molecules/iconButton/styles';
 import { URL_CREATE_ACCOUNT, URL_HOME } from '../../../utils/const';
 import { useUser } from '../../../hooks/user';
+import api from '../../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { profile, authenticateUser } = useUser();
+  const { profile, statusCode, authenticateUser } = useUser();
+  const toast = useToast();
 
   useEffect(() => {
     if (profile) window.location.href = URL_HOME;
   }, [profile]);
 
+  useEffect(() => {
+    console.info('mudou');
+    if (statusCode && statusCode !== 200)
+      toast({
+        title: 'Não foi possivel fazer login',
+        description: 'Verifique seu e-mail e seua senha',
+        status: 'error',
+        variant: 'solid',
+        position: 'top-right',
+        containerStyle: {
+          padding: '16px',
+        },
+      });
+  }, [statusCode]);
+
   const taggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
   const handleAuthenticationUser = async () => {
-    await authenticateUser(email, password);
+    const test = await authenticateUser(email, password);
+    console.log('page::statusCode::', test);
   };
   const handleChangeEmail = (event: any) => setEmail(event.target.value);
   const handleChangePassword = (event: any) => setPassword(event.target.value);

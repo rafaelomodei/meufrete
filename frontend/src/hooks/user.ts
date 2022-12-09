@@ -1,20 +1,26 @@
+import request from 'axios';
 import { useCallback, useState } from 'react';
 import { IUser } from '../modules/entities/user';
 import api from '../services/api';
 
 export const useUser = () => {
   const [profile, setProfile] = useState<IUser>();
+  const [statusCode, setStatusCode] = useState<number>();
 
   const authenticateUser = useCallback(
     async (email: string, password: string) => {
-      const { status, data } = await api.post('/session', {
-        email,
-        password,
-      });
+      try {
+        const { status, data } = await api.post('/session', {
+          email,
+          password,
+        });
 
-      console.info('data: ', data.user);
-      if (status !== 200) throw new Error();
-      setProfile(data.user);
+        if (status !== 200) throw new Error();
+        setProfile(data.user);
+        setStatusCode(status);
+      } catch (err) {
+        if (request.isAxiosError(err)) setStatusCode(err.response?.status);
+      }
     },
     []
   );
@@ -30,10 +36,11 @@ export const useUser = () => {
       company,
     });
 
-    console.info('data: ', data);
+    setStatusCode(status);
+
     if (status !== 201) throw new Error();
     setProfile(data);
   }, []);
 
-  return { profile, authenticateUser, createUser };
+  return { profile, statusCode, authenticateUser, createUser };
 };

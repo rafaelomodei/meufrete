@@ -11,7 +11,7 @@ import {
   Stack,
   useToast,
 } from '@chakra-ui/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { img, svg } from '../../../assets';
 import { Input } from '../../../components/molecules/Input/styles';
 import { theme } from '../../../utils/themes';
@@ -19,7 +19,6 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { IconButton } from '../../../components/molecules/iconButton/styles';
 import { URL_CREATE_ACCOUNT, URL_HOME } from '../../../utils/const';
 import { useUser } from '../../../hooks/user';
-import api from '../../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
@@ -29,15 +28,16 @@ const Login = () => {
   const toast = useToast();
 
   useEffect(() => {
-    if (profile) window.location.href = URL_HOME;
+    if (profile) {
+      window.location.replace(URL_HOME)
+    }
   }, [profile]);
 
   useEffect(() => {
-    console.info('mudou');
     if (statusCode && statusCode !== 200)
       toast({
-        title: 'Não foi possivel fazer login',
-        description: 'Verifique seu e-mail e seua senha',
+        title: 'Não foi possível fazer login',
+        description: 'Verifique seu e-mail e sua senha',
         status: 'error',
         variant: 'solid',
         position: 'top-right',
@@ -50,6 +50,7 @@ const Login = () => {
   const taggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   const handleAuthenticationUser = async () => {
     const test = await authenticateUser(email, password);
     console.log('page::statusCode::', test);

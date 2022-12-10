@@ -1,14 +1,21 @@
 import request from 'axios';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { IUser } from '../modules/entities/user';
 import api from '../services/api';
 
 export const useUser = () => {
   const [profile, setProfile] = useState<IUser>();
   const [statusCode, setStatusCode] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!loading) setStatusCode(undefined);
+  }, [loading]);
 
   const authenticateUser = useCallback(
     async (email: string, password: string) => {
+      setLoading(true);
+      
       try {
         const { status, data } = await api.post('/session', {
           email,
@@ -18,8 +25,10 @@ export const useUser = () => {
         if (status !== 200) throw new Error();
         setProfile(data.user);
         setStatusCode(status);
+        setLoading(false);
       } catch (err) {
         if (request.isAxiosError(err)) setStatusCode(err.response?.status);
+        setLoading(false);
       }
     },
     []
@@ -27,20 +36,26 @@ export const useUser = () => {
 
   const createUser = useCallback(async (dataForm: IUser) => {
     const { name, email, password, driverLicense, company } = dataForm;
+    setLoading(true);
 
-    const { status, data } = await api.post('/users', {
-      name,
-      email,
-      password,
-      driverLicense,
-      company,
-    });
+    try {
+      const { status, data } = await api.post('/users', {
+        name,
+        email,
+        password,
+        driverLicense,
+        company,
+      });
 
-    setStatusCode(status);
-
-    if (status !== 201) throw new Error();
-    setProfile(data);
+      if (status !== 201) throw new Error();
+      setProfile(data);
+      setStatusCode(status);
+      setLoading(false);
+    } catch (err) {
+      if (request.isAxiosError(err)) setStatusCode(err.response?.status);
+      setLoading(false);
+    }
   }, []);
 
-  return { profile, statusCode, authenticateUser, createUser };
+  return { profile, statusCode, loading, authenticateUser, createUser };
 };

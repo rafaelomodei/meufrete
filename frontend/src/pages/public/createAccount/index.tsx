@@ -30,7 +30,6 @@ const CreateAccount = () => {
   const { profile, createUser } = useUser();
 
   useEffect(() => {
-    console.info('CreateUser: profile: ', profile);
     if (profile) window.location.href = URL_HOME;
   }, [profile]);
 
@@ -54,8 +53,8 @@ const CreateAccount = () => {
       <Box w='70%'>
         <Image w='100%' h='100%' objectFit='cover' src={`${img.login}`} />
       </Box>
-      <Center w='100%'>
-        <Center h='100%' maxWidth='400px' minWidth='360px'>
+      <Center w='100%' sx={{ overflowX: 'hidden' }}>
+        <Center mt={60} mb={20} h='100%' maxWidth='400px' minWidth='360px'>
           <Box w='100%'>
             <Center mb={8} flexDirection='column'>
               <Image src={`${svg.logo}`} />

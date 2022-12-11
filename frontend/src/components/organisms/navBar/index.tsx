@@ -14,13 +14,16 @@ export const NavBar = () => {
       flexDirection='column'
       justifyContent='space-between'
       alignItems='center'
+      position='fixed'
+      left={0}
     >
       <Flex flexDirection='column'>
         <IconButton
           aria-label='Search database'
-          icon={<Image w='32px' h='32px' src={svg.logo} />}
-          sx={{ marginBottom: '32px !important' }}
+          icon={<Image w='42px' h='42px' src={svg.logo} />}
+          sx={{ marginBottom: '32px !important', marginTop: '8px' }}
           onClick={() => (window.location.href = URL_HOME)}
+          _hover={{ background: 'transparent !important' }}
         />
         <Flex flexDirection='column'>
           <IconButton

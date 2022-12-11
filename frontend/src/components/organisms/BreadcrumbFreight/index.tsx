@@ -2,7 +2,7 @@ import { BreadcrumbItem, Icon } from '@chakra-ui/react';
 import {
   IItemBreadcrumb,
   ItemBreadcrumb,
-} from '../../molecules/ItemBreadcrumb';
+} from '../../molecules/itemBreadcrumb';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { Breadcrumb } from './styles';
 import { useState } from 'react';

@@ -26,7 +26,6 @@ export const theme = extendTheme({
         boxSizing: 'border-box',
       },
       body: {
-        overflow: 'hidden',
         margin: 0,
         padding: 0,
         bg: '#1E1E1E',

@@ -6,7 +6,7 @@ import api from '../services/api';
 export const useUser = () => {
   const [profile, setProfile] = useState<IUser>();
   const [statusCode, setStatusCode] = useState<number>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!loading) setStatusCode(undefined);
@@ -15,7 +15,7 @@ export const useUser = () => {
   const authenticateUser = useCallback(
     async (email: string, password: string) => {
       setLoading(true);
-      
+
       try {
         const { status, data } = await api.post('/session', {
           email,
@@ -23,6 +23,7 @@ export const useUser = () => {
         });
 
         if (status !== 200) throw new Error();
+        sessionStorage.setItem('token', data.token);
         setProfile(data.user);
         setStatusCode(status);
         setLoading(false);

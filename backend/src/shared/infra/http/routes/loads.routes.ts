@@ -15,8 +15,6 @@ const createLoadController = new CreateLoadController();
 const listLoadsController = new ListLoadsController();
 const importLoadController = new ImportLoadController();
 
-loadsRoutes.use(ensureAuthenticated);
-
 loadsRoutes.post('/', ensureAuthenticated, createLoadController.handle);
 loadsRoutes.get('/', ensureAuthenticated, listLoadsController.handle);
 loadsRoutes.post(

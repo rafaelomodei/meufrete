@@ -15,6 +15,8 @@ export const theme = extendTheme({
       quinternary: '#d68228',
       success: '#50AC4E',
       error: '#DB4D59',
+      errorSecondary: '#c94550',
+      errorTertiary: '#8f2e36',
       text: '#E6E6E6',
       textSecondary: '#cfcfcf',
 

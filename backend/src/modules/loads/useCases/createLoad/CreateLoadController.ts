@@ -5,7 +5,7 @@ import { CreateLoadUseCase } from './CreateLoadUseCase';
 class CreateLoadController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, weight } = request.body;
-    
+
     const createLoadUseCase = container.resolve(CreateLoadUseCase);
     await createLoadUseCase.execute({ name, weight });
 

@@ -6,18 +6,24 @@ import { IItem, Item } from '../../../../components/molecules/item';
 import { theme } from '../../../../utils/themes';
 import { WarningMessage } from '../../../../components/organisms/warningMessage';
 import { useLoad } from '../../../../hooks/load';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CreateLoadModal } from '../../../../components/organisms/createLoadModal';
 import { Loading } from '../../../../components/organisms/loading';
+import { ILoad } from '../../../../modules/entities/load';
 
 export const Load = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loadSelected, setLoadSelected] = useState<ILoad>();
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, loads, getLoads } = useLoad();
 
   useEffect(() => {
     if (!isOpen) getLoads();
   }, [isOpen]);
+
+  useEffect(() => {
+    console.info('loadSelected: ', loadSelected);
+  }, [loadSelected]);
 
   const handleLoad = (): JSX.Element => {
     return loads && loads?.length > 0 ? (
@@ -41,7 +47,7 @@ export const Load = () => {
         </Box>
 
         {loads.map((load) => (
-          <Item title={load.name} />
+          <Item key={load.id} load={load} getLoad={setLoadSelected} />
         ))}
       </>
     ) : (

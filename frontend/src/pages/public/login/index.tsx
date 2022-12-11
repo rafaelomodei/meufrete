@@ -29,7 +29,7 @@ const Login = () => {
 
   useEffect(() => {
     if (profile) {
-      window.location.replace(URL_HOME)
+      window.location.replace(URL_HOME);
     }
   }, [profile]);
 

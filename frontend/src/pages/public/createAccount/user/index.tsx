@@ -5,23 +5,30 @@ import {
   InputRightElement,
   Stack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Dispatch, useEffect, useState } from 'react';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { IconButton } from '../../../../components/molecules/iconButton/styles';
 import { Input } from '../../../../components/molecules/Input/styles';
+import { IUser } from '../../../../modules/entities/user';
 import { theme } from '../../../../utils/themes';
 
-interface IUser {
+interface IUserAccount {
   typeUser: 'DRIVER' | 'COMPANY';
+  getUser: Dispatch<React.SetStateAction<IUser | undefined>>;
 }
 
-export const User = ({ typeUser }: IUser) => {
+export const User = ({ typeUser, getUser }: IUserAccount) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [driverLicense, setDriverLicense] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (name && email && password && confirmPassword)
+      getUser({ name, email, password, driverLicense });
+  }, [name, email, password, confirmPassword, driverLicense]);
 
   const handleChangeName = (event: any) => setName(event.target.value);
   const handleChangeEmail = (event: any) => setEmail(event.target.value);

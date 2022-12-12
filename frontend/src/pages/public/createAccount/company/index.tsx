@@ -1,13 +1,27 @@
 import { Divider, Heading, Stack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Dispatch, useEffect, useState } from 'react';
 import { Input } from '../../../../components/molecules/Input/styles';
+import { ICompany } from '../../../../modules/entities/company';
+import { IUser } from '../../../../modules/entities/user';
 import { theme } from '../../../../utils/themes';
 
-export const Company = () => {
+interface ICompanyAccount {
+  user: IUser | undefined;
+  getCompany: Dispatch<React.SetStateAction<ICompany | undefined>>;
+}
+
+export const Company = ({ user, getCompany }: ICompanyAccount) => {
   const [name, setName] = useState<string>('');
   const [CNPJ, setCNPJ] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [UF, setUF] = useState<string>('');
+
+  useEffect(() => {
+    const userId = sessionStorage.getItem('userId');
+    console.info('userId: ', typeof userId);
+    if (name && CNPJ && city && userId && user)
+      getCompany({ name, certification: true, user: { id: userId } });
+  }, [name, CNPJ, city]);
 
   const handleChangeName = (event: any) => setName(event.target.value);
   const handleChangeCNPJ = (event: any) => setCNPJ(event.target.value);

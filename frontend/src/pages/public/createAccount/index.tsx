@@ -2,12 +2,9 @@ import {
   Box,
   Button,
   Center,
-  Divider,
   Flex,
   Heading,
   Image,
-  InputGroup,
-  InputRightElement,
   Stack,
   TabList,
   TabPanel,
@@ -16,27 +13,49 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { img, svg } from '../../../assets';
-import { Input } from '../../../components/molecules/Input/styles';
 import { theme } from '../../../utils/themes';
-import { BiShow, BiHide } from 'react-icons/bi';
-import { IconButton } from '../../../components/molecules/iconButton/styles';
-import { URL_CREATE_ACCOUNT, URL_HOME, URL_LOGIN } from '../../../utils/const';
+import { URL_HOME, URL_LOGIN } from '../../../utils/const';
 import { useUser } from '../../../hooks/user';
 import { User } from './user';
 import { Company } from './company';
 import { Title } from '../../../components/organisms/title';
 import { Tab } from './styles';
+import { IUser } from '../../../modules/entities/user';
+import { ICompany } from '../../../modules/entities/company';
+import { useCompany } from '../../../hooks/company';
 
 const CreateAccount = () => {
-  const { profile, createUser } = useUser();
+  const [user, setUser] = useState<IUser>();
+  const [companyData, setCompanyData] = useState<ICompany>();
+
+  const { profile, createUser, authenticateUser } = useUser();
+  const { company, createCompany } = useCompany();
+
+  // useEffect(() => {
+  //   if (profile) window.location.href = URL_HOME;
+  // }, [profile]);
 
   useEffect(() => {
-    if (profile) window.location.href = URL_HOME;
-  }, [profile]);
+    console.info('user: ***', user);
+  }, [user]);
 
-  // const handleCreateUser = async () => {
-  //   await createUser({ name, email, password, driverLicense });
-  // };
+  const handleCreateUser = async () => {
+    if (user) {
+      console.info('CRIANDO A USER: ', user);
+
+      await createUser(user);
+    }
+
+    if (user && user?.password) {
+      console.info('Loagando ');
+      await authenticateUser(user.email, user?.password);
+    }
+
+    if (companyData) {
+      console.info('CRIANDO A EMPRESA: ', companyData);
+      await createCompany(companyData);
+    }
+  };
 
   return (
     <Flex width='100%'>
@@ -66,17 +85,17 @@ const CreateAccount = () => {
                   </TabList>
                   <TabPanels>
                     <TabPanel p={0} mt={4}>
-                      <User typeUser='DRIVER' />
+                      <User typeUser='DRIVER' getUser={setUser} />
                     </TabPanel>
                     <TabPanel p={0}>
                       <Box mt={8} mb={4}>
                         <Title text='Dados do administrador' size='md' />
                       </Box>
-                      <User typeUser='COMPANY' />
+                      <User typeUser='COMPANY' getUser={setUser} />
                       <Box mt={8} mb={4}>
                         <Title text='Dados da empresa' size='md' />
                       </Box>
-                      <Company />
+                      <Company getCompany={setCompanyData} user={user} />
                     </TabPanel>
                   </TabPanels>
                 </Tabs>
@@ -104,7 +123,7 @@ const CreateAccount = () => {
                 w='100%'
                 h='48px'
                 mt={8}
-                // onClick={handleCreateUser}
+                onClick={handleCreateUser}
               >
                 Criar conta
               </Button>

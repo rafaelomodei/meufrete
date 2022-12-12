@@ -49,6 +49,7 @@ export const useUser = () => {
       });
 
       if (status !== 201) throw new Error();
+      sessionStorage.setItem('userId', data.id);
       setProfile(data);
       setStatusCode(status);
       setLoading(false);

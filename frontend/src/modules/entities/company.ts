@@ -1,5 +1,8 @@
 import { ILoad } from './load';
-import { IUser } from './user';
+
+type IUser = {
+  id: string;
+};
 
 export interface ICompany {
   name: string;

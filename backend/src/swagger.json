@@ -5,11 +5,30 @@
         "description": "This is an API Rest",
         "version": "1.0.0"
     },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
     "paths": {
         "/loads": {
             "post": {
                 "tags": [
                     "Loads"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
                 ],
                 "summary": "create a load",
                 "description": "Create a new load",
@@ -23,6 +42,9 @@
                     }
                 },
                 "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
                     "201": {
                         "description": "Created"
                     },
@@ -35,9 +57,17 @@
                 "tags": [
                     "Loads"
                 ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "summary": "List all loads",
                 "description": "List all loads",
                 "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -90,6 +120,11 @@
                 "tags": [
                     "Companies"
                 ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "summary": "create a company",
                 "description": "Create a new company",
                 "requestBody": {
@@ -113,6 +148,11 @@
             "get": {
                 "tags": [
                     "Companies"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
                 ],
                 "summary": "List all companies",
                 "description": "List all companies",
@@ -141,10 +181,63 @@
                 }
             }
         },
+        "/companies/loads/{id}": {
+            "post": {
+                "tags": [
+                    "Companies"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "create a company",
+                "description": "Create a new company",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "ID the company"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/AddLoadsToCompany"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "409": {
+                        "description": "Company already exists"
+                    }
+                }
+            }
+        },
         "/companies/import": {
             "post": {
                 "tags": [
                     "Companies"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
                 ],
                 "summary": "create a company",
                 "description": "Create a new company",
@@ -164,18 +257,44 @@
                 }
             }
         },
-        "/drivers": {
+        "/users": {
             "post": {
                 "tags": [
-                    "Drivers"
+                    "Users"
                 ],
-                "summary": "create a driver",
-                "description": "Create a new driver",
+                "summary": "create a user",
+                "description": "Create a new user",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/definitions/Drivers"
+                                "$ref": "#/definitions/CreateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Driver already exists"
+                    }
+                }
+            }
+        },
+        "/session": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "authentication a user",
+                "description": "Authentication a user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/AuthenticatorUser"
                             }
                         }
                     }
@@ -240,7 +359,21 @@
                 "certification": true
             }
         },
-        "Drivers": {
+        "AddLoadsToCompany": {
+            "type": "object",
+            "properties": {
+                "loadsId": {
+                    "type": "array"
+                }
+            },
+            "example": {
+                "loadsId": [
+                    "id load onde",
+                    "id load two"
+                ]
+            }
+        },
+        "CreateUser": {
             "type": "object",
             "properties": {
                 "name": {
@@ -257,10 +390,25 @@
                 }
             },
             "example": {
-                "name": "driver name sample",
-                "email": "email name sample",
-                "password": "password name sample",
-                "driverLicense": "driver license name sample"
+                "name": "user name sample",
+                "email": "teste@teste.com",
+                "password": "123",
+                "driverLicense": "user driver license name sample"
+            }
+        },
+        "AuthenticatorUser": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "email": "teste@teste.com",
+                "password": "123"
             }
         }
     }

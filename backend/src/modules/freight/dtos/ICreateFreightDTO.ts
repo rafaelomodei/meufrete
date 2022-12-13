@@ -31,4 +31,14 @@ interface IJoinWorkDTO {
   user: User;
 }
 
-export { ICreateFreightDTO, IExecuteFreightDTO, IJoinWorkDTO, EStatusFreight };
+interface IFinishWorkDTO {
+  freight: Freight;
+}
+
+export {
+  ICreateFreightDTO,
+  IExecuteFreightDTO,
+  IJoinWorkDTO,
+  IFinishWorkDTO,
+  EStatusFreight,
+};

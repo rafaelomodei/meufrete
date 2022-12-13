@@ -5,6 +5,7 @@ import { Freight } from '../entities/Freight';
 import {
   EStatusFreight,
   ICreateFreightDTO,
+  IFinishWorkDTO,
   IJoinWorkDTO,
 } from '../../../dtos/ICreateFreightDTO';
 
@@ -33,15 +34,28 @@ class FreightRepository implements IFreightRepository {
   async join(data: IJoinWorkDTO): Promise<Freight> {
     const { freight, user } = data;
 
-    const freightUpdated = this.repository.create({
+    const freightUpdate = this.repository.create({
       ...freight,
       status: EStatusFreight.PROGRESS,
       driver: user,
     });
 
-    const freightCreated = await this.repository.save(freightUpdated);
+    const freightUpdated = await this.repository.save(freightUpdate);
 
-    return freightCreated;
+    return freightUpdated;
+  }
+
+  async finish(data: IFinishWorkDTO): Promise<Freight> {
+    const { freight } = data;
+
+    const freightUpdate = this.repository.create({
+      ...freight,
+      status: EStatusFreight.FINISHED,
+    });
+
+    const freightFished = await this.repository.save(freightUpdate);
+
+    return freightFished;
   }
 
   async findById(id: string): Promise<Freight> {

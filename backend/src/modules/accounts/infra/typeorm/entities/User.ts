@@ -31,7 +31,10 @@ class User {
   @OneToOne(() => Company)
   company?: Company;
 
-  @OneToMany(() => Freight, () => User)
+  @OneToMany(() => Freight, () => User, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   freight?: Freight[];
 

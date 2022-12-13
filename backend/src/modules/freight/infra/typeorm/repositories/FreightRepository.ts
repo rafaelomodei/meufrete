@@ -1,8 +1,12 @@
 import { Repository } from 'typeorm';
 import AppDataSource from '../../../../../shared/infra/typeorm/dataSource';
-import { ICreateFreightDTO } from '../../../dtos/ICreateFreightDTO';
 import { IFreightRepository } from '../../../repositories/IFreightRepositories';
 import { Freight } from '../entities/Freight';
+import {
+  EStatusFreight,
+  ICreateFreightDTO,
+  IJoinWorkDTO,
+} from '../../../dtos/ICreateFreightDTO';
 
 class FreightRepository implements IFreightRepository {
   private repository: Repository<Freight>;
@@ -22,6 +26,20 @@ class FreightRepository implements IFreightRepository {
     });
 
     const freightCreated = await this.repository.save(freight);
+
+    return freightCreated;
+  }
+
+  async join(data: IJoinWorkDTO): Promise<Freight> {
+    const { freight, user } = data;
+
+    const freightUpdated = this.repository.create({
+      ...freight,
+      status: EStatusFreight.PROGRESS,
+      driver: user,
+    });
+
+    const freightCreated = await this.repository.save(freightUpdated);
 
     return freightCreated;
   }

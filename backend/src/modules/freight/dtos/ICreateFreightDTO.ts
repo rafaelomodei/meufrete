@@ -2,6 +2,7 @@ import { User } from '../../accounts/infra/typeorm/entities/User';
 import { Company } from '../../companies/infra/typeorm/entities/Company';
 import { Load } from '../../loads/infra/typeorm/entities/Load';
 import { Route } from '../../route/infra/typeorm/entities/Route';
+import { Freight } from '../infra/typeorm/entities/Freight';
 
 enum EStatusFreight {
   AVAILABLE = 'available',
@@ -25,4 +26,9 @@ interface IExecuteFreightDTO {
   destinationCompany: Company;
 }
 
-export { ICreateFreightDTO, IExecuteFreightDTO, EStatusFreight };
+interface IJoinWorkDTO {
+  freight: Freight;
+  user: User;
+}
+
+export { ICreateFreightDTO, IExecuteFreightDTO, IJoinWorkDTO, EStatusFreight };

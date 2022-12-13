@@ -36,7 +36,6 @@ export const useLoad = () => {
 
     try {
       const token = sessionStorage.getItem('token');
-      console.info('GET::token: ', token);
 
       const { status, data } = await api.post(
         '/loads',
@@ -48,8 +47,6 @@ export const useLoad = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.info('status: ', status);
-      console.info('data: ', data);
 
       if (status !== 201) throw new Error();
       setStatusCode(status);

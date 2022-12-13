@@ -14,6 +14,9 @@ const DistanceMatrix = async (
   originCity: string,
   destinationCity: string
 ): Promise<IRouteDistanceMatrix> => {
+  console.info('DistanceMatrix::originCity: ', originCity);
+  console.info('DistanceMatrix::destinationCity: ', destinationCity);
+
   try {
     const request = {
       origins: originCity,
@@ -26,6 +29,8 @@ const DistanceMatrix = async (
     const { data } = await axios(
       `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${request.origins}&destinations=${request.destinations}&departure_time=${request.departureTime}&key=${request.key}`
     );
+
+    console.info('DistanceMatrix::data: ', data);
 
     const route: IRouteDistanceMatrix = {
       distance: data.rows[0].elements[0].distance.value,

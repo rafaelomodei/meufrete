@@ -8,7 +8,11 @@ const freightsRoutes = Router();
 const createFreightsController = new CreateFreightController();
 const listFreightsController = new ListFreightsController();
 
-freightsRoutes.post('/', ensureAuthenticated, createFreightsController.handle);
+freightsRoutes.post(
+  '/:originCompany',
+  ensureAuthenticated,
+  createFreightsController.handle
+);
 freightsRoutes.get('/', ensureAuthenticated, listFreightsController.handle);
 
 export { freightsRoutes };

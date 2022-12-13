@@ -4,10 +4,12 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { Company } from '../../../../companies/infra/typeorm/entities/Company';
+import { Freight } from '../../../../freight/infra/typeorm/entities/Freight';
 
 @Entity('users')
 class User {
@@ -28,6 +30,10 @@ class User {
 
   @OneToOne(() => Company)
   company?: Company;
+
+  @OneToMany(() => Freight, () => User)
+  @JoinColumn()
+  freight?: Freight[];
 
   @CreateDateColumn()
   createdAt: Date;

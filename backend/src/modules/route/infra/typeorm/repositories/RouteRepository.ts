@@ -4,7 +4,6 @@ import { ICreateRouteDTO } from '../../../dtos/ICreateRouteDTO';
 import { IRoutesRepository } from '../../../repositories/IRouteRepositories';
 import { Route } from '../entities/Route';
 
-
 class RoutesRepository implements IRoutesRepository {
   private repository: Repository<Route>;
 
@@ -12,7 +11,7 @@ class RoutesRepository implements IRoutesRepository {
     this.repository = AppDataSource.getRepository(Route);
   }
 
-  async create(data: ICreateRouteDTO): Promise<void> {
+  async create(data: ICreateRouteDTO): Promise<Route> {
     const {
       distance,
       originCity,
@@ -28,7 +27,9 @@ class RoutesRepository implements IRoutesRepository {
       destinationCompany,
     });
 
-    await this.repository.save(route);
+    const routeCreated = await this.repository.save(route);
+
+    return routeCreated;
   }
 
   async findById(id: string): Promise<Route> {

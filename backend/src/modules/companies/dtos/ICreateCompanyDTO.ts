@@ -4,6 +4,7 @@ import { Load } from '../../loads/infra/typeorm/entities/Load';
 interface ICompanyDTO {
   id?: string;
   name: string;
+  city: string;
   certification: boolean;
   loads?: Load[];
   user?: User;

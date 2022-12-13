@@ -11,16 +11,19 @@ class FreightRepository implements IFreightRepository {
     this.repository = AppDataSource.getRepository(Freight);
   }
 
-  async create(data: ICreateFreightDTO): Promise<void> {
-    const { price, route, load } = data;
+  async create(data: ICreateFreightDTO): Promise<Freight> {
+    const { price, route, load, status } = data;
 
     const freight = this.repository.create({
+      status,
       price,
       route,
       load,
     });
 
-    await this.repository.save(freight);
+    const freightCreated = await this.repository.save(freight);
+
+    return freightCreated;
   }
 
   async findById(id: string): Promise<Freight> {

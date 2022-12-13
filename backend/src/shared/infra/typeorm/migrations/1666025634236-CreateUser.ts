@@ -30,6 +30,11 @@ export class CreateUser1666025634236 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'freightId',
+            type: 'uuid',
+            isNullable: true,
+          },
+          {
             name: 'createdAt',
             type: 'timestamp',
             default: 'now()',

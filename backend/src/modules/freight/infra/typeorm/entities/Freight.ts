@@ -11,11 +11,19 @@ import {
 } from 'typeorm';
 import { Route } from '../../../../route/infra/typeorm/entities/Route';
 import { Load } from '../../../../loads/infra/typeorm/entities/Load';
+import { User } from '../../../../accounts/infra/typeorm/entities/User';
+import { EStatusFreight } from '../../../dtos/ICreateFreightDTO';
 
 @Entity('freights')
 class Freight {
   @PrimaryColumn()
   id?: string;
+
+  @Column()
+  status: string;
+
+  @ManyToOne(() => User, () => Freight, { eager: true })
+  driver: User;
 
   @Column()
   price: number;

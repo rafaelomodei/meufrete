@@ -12,6 +12,10 @@ export class CreateFreight1667474818537 implements MigrationInterface {
             isPrimary: true,
           },
           {
+            name: 'status',
+            type: 'varchar',
+          },
+          {
             name: 'price',
             type: 'decimal',
             isNullable: true,
@@ -26,7 +30,11 @@ export class CreateFreight1667474818537 implements MigrationInterface {
             type: 'uuid',
             isNullable: true,
           },
-
+          {
+            name: 'driverId',
+            type: 'uuid',
+            isNullable: true,
+          },
           {
             name: 'createdAt',
             type: 'timestamp',

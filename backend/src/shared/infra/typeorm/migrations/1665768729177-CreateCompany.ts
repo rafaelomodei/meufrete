@@ -21,6 +21,10 @@ export class CreateCompany1665768729177 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'city',
+            type: 'varchar',
+          },
+          {
             name: 'certification',
             type: 'boolean',
           },

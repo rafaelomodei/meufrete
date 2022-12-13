@@ -21,6 +21,9 @@ class Company {
   name: string;
 
   @Column()
+  city: string;
+
+  @Column()
   certification: boolean;
 
   @OneToOne(() => User, { eager: true })

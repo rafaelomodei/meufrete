@@ -40,21 +40,12 @@ const CreateAccount = () => {
   }, [user]);
 
   const handleCreateUser = async () => {
-    if (user) {
-      console.info('CRIANDO A USER: ', user);
+    if (user) await createUser(user);
 
-      await createUser(user);
-    }
-
-    if (user && user?.password) {
-      console.info('Loagando ');
+    if (user && user?.password)
       await authenticateUser(user.email, user?.password);
-    }
 
-    if (companyData) {
-      console.info('CRIANDO A EMPRESA: ', companyData);
-      await createCompany(companyData);
-    }
+    if (companyData) await createCompany(companyData);
   };
 
   return (

@@ -20,6 +20,32 @@
         }
     ],
     "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "create a user",
+                "description": "Create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/CreateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Driver already exists"
+                    }
+                }
+            }
+        },
         "/loads": {
             "post": {
                 "tags": [
@@ -62,7 +88,7 @@
                         "bearerAuth": []
                     }
                 ],
-                "summary": "List all loads",
+                "summary": "list all loads",
                 "description": "List all loads",
                 "responses": {
                     "401": {
@@ -257,32 +283,6 @@
                 }
             }
         },
-        "/users": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "create a user",
-                "description": "Create a new user",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/definitions/CreateUser"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created"
-                    },
-                    "500": {
-                        "description": "Driver already exists"
-                    }
-                }
-            }
-        },
         "/session": {
             "post": {
                 "tags": [
@@ -302,6 +302,82 @@
                 "responses": {
                     "201": {
                         "description": "Created"
+                    },
+                    "500": {
+                        "description": "Driver already exists"
+                    }
+                }
+            }
+        },
+        "/freights/{originCompany}": {
+            "post": {
+                "tags": [
+                    "Freight"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "create a freight",
+                "description": "Create a new Freight",
+                "parameters": [
+                    {
+                        "name": "originCompany",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "ID the origin company"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/CreateFreight"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Driver already exists"
+                    }
+                }
+            }
+        },
+        "/freights": {
+            "get": {
+                "tags": [
+                    "Freight"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "list all freight",
+                "description": "List all Freight",
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseFreight"
+                        }
                     },
                     "500": {
                         "description": "Driver already exists"
@@ -371,6 +447,80 @@
                     "id load onde",
                     "id load two"
                 ]
+            }
+        },
+        "CreateFreight": {
+            "type": "object",
+            "properties": {
+                "price": {
+                    "type": "number"
+                },
+                "load": {
+                    "type": "string"
+                },
+                "destinationCompany": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "example": {
+                "price": 1500,
+                "load": "c48aec95-15fc-4841-9b52-5c39d59af374",
+                "destinationCompany": {
+                    "id": "18d7062d-62c8-4c05-8040-8f52a2b7bd5a"
+                }
+            }
+        },
+        "ResponseFreight": {
+            "type": "array",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "satatus": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "driver": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "driverLicense": {
+                            "type": "string"
+                        },
+                        "createdAt": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "example": {
+                "price": "27000",
+                "load": "c48aec95-15fc-4841-9b52-5c39d59af374",
+                "password": "123",
+                "destinationCompany": {
+                    "id": "18d7062d-62c8-4c05-8040-8f52a2b7bd5a"
+                }
             }
         },
         "CreateUser": {

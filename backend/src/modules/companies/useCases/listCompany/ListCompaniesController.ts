@@ -4,6 +4,7 @@ import { ListCompaniesUseCase } from './ListCompaniesUseCase';
 
 class ListCompaniesController {
   async handle(request: Request, response: Response): Promise<Response> {
+
     const listCompaniesUseCase = container.resolve(ListCompaniesUseCase);
     const allCompanies = await listCompaniesUseCase.execute();
 

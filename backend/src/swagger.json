@@ -526,6 +526,9 @@
         "CreateUser": {
             "type": "object",
             "properties": {
+                "type": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -540,6 +543,7 @@
                 }
             },
             "example": {
+                "type": "DRIVER ou COMPANY",
                 "name": "user name sample",
                 "email": "teste@teste.com",
                 "password": "123",

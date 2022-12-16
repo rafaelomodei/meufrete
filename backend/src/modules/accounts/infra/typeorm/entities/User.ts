@@ -10,11 +10,15 @@ import {
 } from 'typeorm';
 import { Company } from '../../../../companies/infra/typeorm/entities/Company';
 import { Freight } from '../../../../freight/infra/typeorm/entities/Freight';
+import { ETypeUser } from '../../../dtos/ICreateUserDTO';
 
 @Entity('users')
 class User {
   @PrimaryColumn()
   id?: string;
+
+  @Column()
+  type: string;
 
   @Column()
   name: string;

@@ -1,17 +1,31 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppErrors';
 import { ICompaniesRepository } from '../../repositories/ICompaniesRepositories';
-import { ICompanyDTO } from '../../dtos/ICreateCompanyDTO';
+import { ICompanyDTO, ICreateCompanyDTO } from '../../dtos/ICreateCompanyDTO';
 import { Company } from '../../infra/typeorm/entities/Company';
+import { ETypeUser } from '../../../accounts/dtos/ICreateUserDTO';
+import { IUsersRepository } from '../../../accounts/repositories/IUserRepositories';
 @injectable()
 class CreateCompanyUseCase {
   constructor(
     @inject('CompaniesRepository')
-    private companiesRepository: ICompaniesRepository
+    private companiesRepository: ICompaniesRepository,
+
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
   ) {}
 
-  async execute(data: ICompanyDTO): Promise<Company> {
-    const { name, certification, loads, user, city } = data;
+  async execute(data: ICreateCompanyDTO): Promise<Company> {
+    const { name, certification, loads, userId, city } = data;
+
+    const userAlreadyExists = await this.usersRepository.findById(userId);
+
+    if (!userAlreadyExists) throw new AppError(`user does not exists`);
+
+    const typeUser = userAlreadyExists.type;
+    const isCompany = typeUser === ETypeUser.COMPANY;
+
+    if (!isCompany) throw new AppError('permission denied', 403);
 
     const companyAlreadyExists = await this.companiesRepository.findByName(
       name
@@ -23,7 +37,7 @@ class CreateCompanyUseCase {
       name,
       certification,
       loads,
-      user,
+      user: userAlreadyExists,
       city,
     });
 

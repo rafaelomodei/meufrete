@@ -4,7 +4,7 @@ import { Load } from '../infra/typeorm/entities/Load';
 interface ILoadsRepository {
   findByName(name: string): Promise<Load>;
   list(): Promise<Load[]>;
-  create({ name, weight }: ILoadDTO): Promise<void>;
+  create({ name, weight }: ILoadDTO): Promise<Load>;
   findByIds(ids: string[]): Promise<Load[]>;
 }
 

@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import { verify } from 'jsonwebtoken';
+import { verify, decode } from 'jsonwebtoken';
 import { AppError } from '../../../errors/AppErrors';
 import { UsersRepository } from '../../../../modules/accounts/infra/typeorm/repositories/UserRepository';
 import { config as envConfig } from 'dotenv';
+import { ETypeUser } from '../../../../modules/accounts/dtos/ICreateUserDTO';
 envConfig();
 const { env } = process;
 
@@ -10,7 +11,7 @@ interface IPayload {
   sub: string;
 }
 
-export async function ensureAuthenticated(
+export async function ensureUserCompany(
   request: Request,
   response: Response,
   next: NextFunction
@@ -21,12 +22,16 @@ export async function ensureAuthenticated(
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: user_id } = verify(token, `${env.KEY_JWT}`) as IPayload;
+    const { sub: user_id } = decode(token) as IPayload;
 
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findById(user_id);
 
-    if (!user) throw new AppError('User does not exist', 401);
+    const typeUser = user.type;
+
+    const isCompany = typeUser === ETypeUser.COMPANY;
+
+    if (!isCompany) throw new AppError('User does not permission', 403);
 
     next();
   } catch {

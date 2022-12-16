@@ -11,13 +11,15 @@ class LoadsRepository implements ILoadsRepository {
     this.repository = AppDataSource.getRepository(Load);
   }
 
-  async create({ name, weight }: ILoadDTO): Promise<void> {
+  async create({ name, weight }: ILoadDTO): Promise<Load> {
     const load = this.repository.create({
       name,
       weight,
     });
 
-    await this.repository.save(load);
+    const loadCreated = await this.repository.save(load);
+
+    return loadCreated;
   }
 
   async list(): Promise<Load[]> {

@@ -10,4 +10,12 @@ interface ICompanyDTO {
   user?: User;
 }
 
-export { ICompanyDTO };
+interface ICreateCompanyDTO {
+  id?: string;
+  name: string;
+  city: string;
+  certification: boolean;
+  loads?: Load[];
+  userId: string;
+}
+export { ICompanyDTO, ICreateCompanyDTO };

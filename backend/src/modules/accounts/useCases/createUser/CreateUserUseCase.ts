@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcrypt';
 import { IUsersRepository } from '../../repositories/IUserRepositories';
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { ICreateUserDTO, ETypeUser } from '../../dtos/ICreateUserDTO';
 import { AppError } from '../../../../shared/errors/AppErrors';
 import { User } from '../../infra/typeorm/entities/User';
 
@@ -13,7 +13,11 @@ class CreateUserUseCase {
   ) {}
 
   async execute(data: ICreateUserDTO): Promise<User> {
-    const { name, email, password, driverLicense, company } = data;
+    const { type, name, email, password, driverLicense, company } = data;
+
+    const verifyTypeUser = ETypeUser[type];
+
+    if (!verifyTypeUser) throw new AppError(`Type user don't exist`);
 
     const emailUser = email.toLowerCase();
     const userAlreadyExists = await this.usersRepository.findByEmail(emailUser);
@@ -26,6 +30,7 @@ class CreateUserUseCase {
 
     const passwordHash = await hash(password, 8);
     const user = {
+      type: type,
       name: name.toLowerCase(),
       password: passwordHash,
       email: email.toLowerCase(),

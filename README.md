@@ -8,79 +8,29 @@ O sistema meufrete.com, é uma plataforma, onde as companias podem cadastrar seu
 
 ---
 
-## Cargas
+### Executando o projeto
 
-### Cadastro de cargas
+***Backend*** : 
 
-**Requisitos Funcionais**
+Entra dentro da pasta 
+```backend```
 
-- [ ] Deve ser possivel cadastar uma nova carga
+Roda o comando ```Docker-compose up --build```
 
-**Regra de Negócio**
-
-- [ ] Não deve ser possível cadastrar uma carga com o mesmo nome
-- [ ] Não deve ser possível alterar o nome da carga para um nome já cadastrado
-- [ ] A compania (empresa) é responsável pelo cadastro de uma nova carga.
-
----
-
-## Compania
-
-**Requisitos Funcionais**
-
-**Requisitos Não Funcionais**
-
-**Regra de Negócio**
-
-- [ ] Não deve ser possível cadastrar uma empresa com o mesmo nome
-- [ ] Não deve ser possível alterar o nome da empresa para um nome já cadastrado
-
----
-
-## Rota
-
-**Requisitos Não Funcionais**
-
-- [ ] O sistema deve calcular a distancia em KM, entre a cidade de origem e a cidade de destino
+Pronto! Dessa forma a api e o banco de dados devem subir.
 
 
-**Regra de Negócio**
+***Frontend***
+Entra dentro da pasta 
+```frontend```
 
-- [ ] Deve ser possível calcular a distancia entre duas cidades
-- [ ] Deve ter somente uma rota para cada frete
+Roda o comando ```Docker-compose up --build```
 
----
+Pronto! Dessa forma o frontend devem subir.
 
-## Frete
 
-### Lista de fretes 
+Para acessar o front, basta acessar o endereço ```localhost:3332```
 
-**Requisitos Funcionais**
+Para acessar o backend, basta acessar o endereço ```localhost:3333```
 
-- [ ] Deve ser possivel listar todos os fretes disponíveis
-- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da carga
-- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da compania de origem
-- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da compania de destino
-- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da cidade de origem
-- [ ] Deve ser possivel listar todos os fretes disponíveis pelo nome da carga de destino
-
-**Requisitos Não Funcionais**
-
-- [ ] O motorista precisa estar logado no sistema
-
-**Regra de Negócio**
-
-### Pegar de fretes 
-
-**Requisitos Funcionais**
-
-- [ ] O motorista deve sr capas de pegar frete
-
-**Requisitos Não Funcionais**
-
-- [ ] O sistema não deve deixar o motorista pegar mais de um frete
-
-**Requisitos Não Funcionais**
-
-- [ ] O motorista pode pegar somente um frete
-
+Para acessar a documentação, basta acessa o endereço ```localhost:3333/api-docs```

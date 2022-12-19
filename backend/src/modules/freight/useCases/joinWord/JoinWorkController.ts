@@ -1,23 +1,18 @@
 import { Response, Request } from 'express';
 import { container } from 'tsyringe';
-import { Company } from '../../../companies/infra/typeorm/entities/Company';
-import { EStatusFreight } from '../../dtos/ICreateFreightDTO';
-import { Freight } from '../../infra/typeorm/entities/Freight';
+import currentUser from '../../../../utils/user';
 import { JoinWorkUseCase } from './JoinWorkUseCase';
 
 class JoinWorkController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { freight } = request.params;
-    const { user } = request.body;
+    const userId = currentUser(request);
 
     const joinWorkUseCase = container.resolve(JoinWorkUseCase);
 
-    const work = await joinWorkUseCase.execute({
-      freight: { id: freight } as Freight,
-      user,
-    });
+    const work = await joinWorkUseCase.execute(freight, userId);
 
-    return response.status(201).json(work);
+    return response.status(200).json(work);
   }
 }
 

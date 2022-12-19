@@ -10,8 +10,6 @@ class CreateFreightController {
     const { originCompany } = request.params;
     const { price, load, destinationCompany } = request.body;
 
-    // console.info('CreateFreightController::originCompany: ', originCompany)
-
     const createFreightUseCase = container.resolve(CreateFreightUseCase);
 
     const freight = await createFreightUseCase.execute({

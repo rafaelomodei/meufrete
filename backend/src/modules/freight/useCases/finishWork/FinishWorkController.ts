@@ -13,7 +13,7 @@ class FinishWorkController {
       freight: { id: freight } as Freight,
     });
 
-    return response.status(201).json(work);
+    return response.status(200).json(work);
   }
 }
 

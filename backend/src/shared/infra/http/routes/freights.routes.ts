@@ -4,6 +4,8 @@ import { FinishWorkController } from '../../../../modules/freight/useCases/finis
 import { JoinWorkController } from '../../../../modules/freight/useCases/joinWord/JoinWorkController';
 import { ListFreightsController } from '../../../../modules/freight/useCases/listRoutes/ListFreightController';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import { ensureUserCompany } from '../middlewares/ensureUserCompany';
+import { ensureUserDriver } from '../middlewares/ensureUserDriver';
 
 const freightsRoutes = Router();
 
@@ -15,11 +17,13 @@ const finishWorkController = new FinishWorkController();
 freightsRoutes.post(
   '/:originCompany',
   ensureAuthenticated,
+  ensureUserCompany,
   createFreightsController.handle
 );
 freightsRoutes.post(
   '/join/:freight',
   ensureAuthenticated,
+  ensureUserDriver,
   joinWorkController.handle
 );
 

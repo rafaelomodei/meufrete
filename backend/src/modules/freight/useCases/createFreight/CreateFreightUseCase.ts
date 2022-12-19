@@ -22,15 +22,8 @@ class CreateFreightUseCase {
   async execute(data: IExecuteFreightDTO): Promise<void> {
     const { price, load, status, originCompany, destinationCompany } = data;
 
-    console.info('execute::originCompany: ', originCompany);
-
     const originCompanyAlreadyExists = await this.companyRepository.findById(
       originCompany.id
-    );
-
-    console.info(
-      'originCompanyAlreadyExists::originCompany: ',
-      originCompanyAlreadyExists
     );
 
     if (!originCompanyAlreadyExists)

@@ -6,7 +6,7 @@ import { ETypeUser } from '../../../../modules/accounts/dtos/ICreateUserDTO';
 import currentUser from '../../../../utils/user';
 envConfig();
 
-export async function ensureUserCompany(
+export async function ensureUserDriver(
   request: Request,
   response: Response,
   next: NextFunction
@@ -21,7 +21,7 @@ export async function ensureUserCompany(
 
     const typeUser = user.type;
 
-    const isCompany = typeUser === ETypeUser.COMPANY;
+    const isCompany = typeUser === ETypeUser.DRIVER;
 
     if (!isCompany) throw new AppError('User does not permission', 403);
 

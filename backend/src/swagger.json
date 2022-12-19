@@ -357,6 +357,87 @@
                 }
             }
         },
+        "/freights/join/{freight}": {
+            "post": {
+                "tags": [
+                    "Freight"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "join a freight",
+                "description": "Join a Freight",
+                "parameters": [
+                    {
+                        "name": "freight",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "ID the freight"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "409": {
+                        "description": "freight not available'"
+                    },
+                    "200": {
+                        "description": "Join success"
+                    }
+                }
+            }
+        },
+        "/freights/finish/{freight}": {
+            "post": {
+                "tags": [
+                    "Freight"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "finish a freight",
+                "description": "Finish a Freight",
+                "parameters": [
+                    {
+                        "name": "freight",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "ID the freight"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "409": {
+                        "description": "freight is not in progress"
+                    },
+                    "417": {
+                        "description": "freight already completed"
+                    },
+                    "200": {
+                        "description": "Finish success"
+                    }
+                }
+            }
+        },
         "/freights": {
             "get": {
                 "tags": [
